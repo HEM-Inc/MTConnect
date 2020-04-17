@@ -1,28 +1,54 @@
-# MTConnect Version 1.4
+#!/bin/sh
+# ---- Base Node ----
+# This dockerfile defines the expected runtime environment before the project is installed
+FROM ubuntu:latest AS base
+# FROM debian:latest AS base
 
-FROM ubuntu:18.04
+# ---- Dependencies ----
+### Be sure to install any runtime dependencies
+FROM base AS dependencies
 
-MAINTAINER raymond.cui2015@gmail.com
+RUN apt-get clean \
+	&& apt-get update \
+	&& apt-get install -y \
+	curl \
+	libxml2-dev \
+	libcppunit-dev \
+	build-essential
 
-# Download, validate, and expand Apache NiFi binary.
+# ---- Core ----
+### Application compile
+FROM dependencies AS core
+
 RUN apt-get update \
-    && apt-get install -y libxml2 libxml2-dev cmake git libcppunit-dev build-essential screen ruby curl \
-    && mkdir -p ~/agent/build \ 
-    && cd ~/agent \
-    && git clone https://github.com/mtconnect/cppagent.git \
-    && cd cppagent \
-    && git submodule init \
-    && git submodule update \
-    && cd .. \
-    && cd build \ 
-    && cmake -D CMAKE_BUILD_TYPE=Release ../cppagent/ \
-    && make \ 
-    && cp agent/agent /usr/local/bin \
-    && mkdir -p /etc/mtconnect/agent /etc/mtconnect/adapter \
-    && cd ~/agent/cppagent \
-    && cp -r styles schemas simulator/VMC-3Axis.xml /etc/mtconnect/agent \
-    && cp simulator/VMC-3Axis-Log.txt simulator/run_scenario.rb /etc/mtconnect/adapter
+	&& apt-get install -y \
+	apt-utils \
+	make \
+	cmake \
+	git \
+	&& git clone --recurse-submodules https://github.com/mtconnect/cppagent.git /app_build/ \
+	&& cd /app_build/ \
+	&& git submodule init \
+	&& git submodule update \
+	&& cmake -G 'Unix Makefiles' . \
+	&& make
 
-# Web HTTP(s) & Socket Site-to-Site Ports
-EXPOSE 5000 7878
+# ---- Release ----
+### Create folders, copy device files and dependencies for the release
+FROM dependencies AS release
+LABEL author="maxharris@hemsaw.com"
+EXPOSE 5000:5000/tcp
 
+# RUN mkdir /MTC_Agent/ 
+# COPY <src> <dest>
+COPY docker-entrypoint.sh /MTC_Agent/
+COPY agent.cfg /MTC_Agent/
+COPY ./Devices/ /MTC_Agent/
+COPY --from=core app_build/schemas/ /MTC_Agent/schemas
+COPY --from=core app_build/simulator/ /MTC_Agent/simulator
+COPY --from=core app_build/styles/ /MTC_Agent/style
+COPY --from=core app_build/agent/agent /MTC_Agent/agent
+
+# Set permission on the folder
+RUN ["chmod", "o+x", "/MTC_Agent/"]
+### EOF
