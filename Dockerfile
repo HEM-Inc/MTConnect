@@ -36,7 +36,7 @@ RUN apt-get update \
 # ---- Release ----
 ### Create folders, copy device files and dependencies for the release
 FROM dependencies AS release
-LABEL author="thomasharris55@gmail.com"
+LABEL author="skibum1869"
 EXPOSE 5000:5000/tcp
 
 # RUN mkdir /MTC_Agent/ 
