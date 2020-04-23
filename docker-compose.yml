@@ -4,7 +4,7 @@ services:
     build: .
     ports: 
       - target: 5000
-        published: 80
+        published: 5000
         protocol: tcp
         mode: host
     entrypoint: "sh -x docker-entrypoint.sh"
