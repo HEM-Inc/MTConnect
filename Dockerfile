@@ -8,6 +8,8 @@ FROM ubuntu:latest AS base
 ### Be sure to install any runtime dependencies
 FROM base AS dependencies
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \

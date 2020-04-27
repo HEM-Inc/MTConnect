@@ -2,6 +2,9 @@ version: '3.4'
 services:
   web:
     build: .
+    environment:
+      - TZ=Etc/UTC
+      - DEBIAN_FRONTEND=noninteractive
     ports: 
       - target: 5000
         published: 5000
