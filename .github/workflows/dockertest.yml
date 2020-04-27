@@ -1,0 +1,31 @@
+name: Docker Test
+
+on:
+  test:
+    # Test `develop`
+    branches:
+      - develop
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  IMAGE_NAME: MTConnect_Docker_Agent
+
+jobs:
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+          if [ -f docker-compose.test.yml ]; then
+            docker-compose --file docker-compose.test.yml build
+            docker-compose --file docker-compose.test.yml run sut
+          else
+            docker build . --file Dockerfile
+          fi
