@@ -48,7 +48,7 @@ COPY agent.cfg /MTC_Agent/
 COPY ./Devices/ /MTC_Agent/
 COPY --from=core app_build/schemas/ /MTC_Agent/schemas
 COPY --from=core app_build/simulator/ /MTC_Agent/simulator
-COPY --from=core app_build/styles/ /MTC_Agent/style
+COPY --from=core app_build/styles/ /MTC_Agent/styles
 COPY --from=core app_build/agent/agent /MTC_Agent/agent
 
 # Set permission on the folder
