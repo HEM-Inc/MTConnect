@@ -122,11 +122,26 @@ services:
         consistency: delegated
 ```
 
-# Core Docker Commands
+# Core Docker and MTConnect Commands
+
+## Build comand for docker to create a run time for latest MTC_Agent
+```bash
+docker build . -t "mtc_agent:latest"
+```
+
+## Run the docker image
+```bash
+docker run --name agent -it mtc_agent
+```
+
+## Clear all images and containers
+```bash
+docker system prune -a
+```
 
 ## Git pull latest and ignore local changes
 ``` bash
-git reset --hard | git pull
+git reset --hard | sudo git pull
 ```
 
 ## To run the docker-compose file:
@@ -137,6 +152,18 @@ docker-compose up --force-recreate --build --remove-orphans -d
 ## To shutdown the docker-compose instance
 ``` bash
 docker-compose down
+```
+
+## Access the log files
+From the pwd type the following:
+```bash
+grep (what are you searching for) log/adapter.log
+```
+
+## Pushing Assets
+To push the asset you need to be in the source folder of the asset.
+```bash
+curl -d @ZWEQ063C34HPII.xml 'http://controlslab.hemsaw.com:5000/asset/ZWEQ063C34HPII.1?device=CTS2_device&type=CuttingTool'
 ```
 
 Note: depending on the setup of your computer you may have to run the sudo command on a linux machine to get docker-compose to build or destroy a process. 

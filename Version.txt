@@ -1,1 +1,2 @@
-1.6.0
+MTConnect: 1.6.0
+Project: 1.6.0.1
