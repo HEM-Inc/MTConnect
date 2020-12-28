@@ -131,7 +131,7 @@ docker build . -t "mtc_agent:latest"
 
 ## Run the docker image
 ```bash
-docker run --name agent -it mtc_agent
+docker run --name agent --rm -it mtc_agent
 ```
 
 ## Clear all images and containers

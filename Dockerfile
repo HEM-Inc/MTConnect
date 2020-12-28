@@ -4,27 +4,24 @@
 FROM ubuntu:latest AS base
 # FROM debian:latest AS base
 
-# ---- Dependencies ----
-### Be sure to install any runtime dependencies
-FROM base AS dependencies
+# ---- Core ----
+### Application compile
+FROM base AS core
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
+	curl
+RUN apt-get clean \
+	&& apt-get update \
+	&& apt-get install -y \
 	curl \
+	apt-utils \
 	libxml2-dev \
 	libcppunit-dev \
-	build-essential
-
-# ---- Core ----
-### Application compile
-FROM dependencies AS core
-
-RUN apt-get update \
-	&& apt-get install -y \
-	apt-utils \
+	build-essential \
 	make \
 	cmake \
 	git \
@@ -37,9 +34,9 @@ RUN apt-get update \
 
 # ---- Release ----
 ### Create folders, copy device files and dependencies for the release
-FROM dependencies AS release
-LABEL author="skibum1869"
-LABEL description="Docker image for the latest MTConnect C++ Agent supplied \
+FROM base AS release
+ENV DEBIAN_FRONTEND=noninteractive
+LABEL author="skibum1869" description="Docker image for the latest MTConnect C++ Agent supplied \
 from the MTConnect Institute"
 EXPOSE 5000:5000/tcp
 
