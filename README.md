@@ -1,7 +1,7 @@
 # MTConnect_Docker_Agent Project
 
 This repo houses a Docker-Compose version of the MTConnect Cpp agent. This creates most of the needed items to build a local docker CPP agent using docker and docker-compose.
-This project will mirror the log file to the local machine for full trace logging of the agent.
+This project will mirror the log file to the local machine for full trace logging of the agent. This project was origionally forked from [RaymondCui21/MTConnect_Docker](https://github.com/RaymondCui21/MTConnect_Docker), The project has been seperated from the origional code set due to the amount of changes occuring. 
 
 # Running from GitHub
 
