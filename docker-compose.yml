@@ -10,7 +10,7 @@ services:
         published: 5000
         protocol: tcp
         mode: host
-    entrypoint: "sh -x docker-entrypoint.sh"
+    entrypoint: "/bin/sh -x docker-entrypoint.sh"
     working_dir: "/MTC_Agent/"
     container_name: MTConnect_Agent
     restart: unless-stopped
