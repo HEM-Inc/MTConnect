@@ -163,7 +163,7 @@ grep (what are you searching for) log/adapter.log
 ## Pushing Assets
 To push the asset you need to be in the source folder of the asset.
 ```bash
-curl -d @ZWEQ063C34HPII.xml 'http://controlslab.hemsaw.com:5000/asset/ZWEQ063C34HPII.1?device=CTS2_device&type=CuttingTool'
+curl -d @ZWEQ063C34HPII.xml 'http://example.com:5000/asset/ZWEQ063C34HPII.1?device=CTS2_device&type=CuttingTool'
 ```
 
 Note: depending on the setup of your computer you may have to run the sudo command on a linux machine to get docker-compose to build or destroy a process. 
