@@ -14,7 +14,7 @@ on:
   pull_request:
 
 env:
-  IMAGE_NAME: MTConnect_Docker_Agent
+  IMAGE_NAME: MTConnnect_Ubuntu_Agent
 
 jobs:
   # Run tests.
