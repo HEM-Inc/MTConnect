@@ -42,13 +42,12 @@ EXPOSE 5000:5000/tcp
 
 WORKDIR /MTC_Agent/
 # COPY <src> <dest>
-COPY docker-entrypoint.sh /MTC_Agent/
-COPY agent.cfg /MTC_Agent/
+COPY agent.cfg docker-entrypoint.sh /MTC_Agent/
 COPY ./Devices/ /MTC_Agent/
 COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
 COPY --from=ubuntu-core app_build/simulator/ /MTC_Agent/simulator
 COPY --from=ubuntu-core app_build/styles/ /MTC_Agent/styles
-COPY --from=ubuntu-core app_build/agent/agent /MTC_Agent/agent
+COPY --from=ubuntu-core app_build/agent/agent /MTC_Agent/
 
 # Set permission on the folder
 RUN chmod +x /MTC_Agent/agent && \
