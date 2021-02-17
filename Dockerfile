@@ -18,12 +18,11 @@ RUN apt-get clean \
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
-	curl \
 	g++ \
 	make \
 	cmake \
 	git \
-	&& git clone --recurse-submodules https://github.com/mtconnect/cppagent.git /app_build/ \
+	&& git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git /app_build/ \
 	&& cd /app_build/ \
 	&& git submodule init \
 	&& git submodule update \
@@ -50,9 +49,3 @@ RUN chmod +x /MTC_Agent/agent && \
 	chmod +x /MTC_Agent/docker-entrypoint.sh
 ENTRYPOINT ["/bin/sh", "-x", "/MTC_Agent/docker-entrypoint.sh"]
 ### EOF
-
-
-	# apt-utils \
-	# libxml2-dev \
-	# libcppunit-dev \
-	# build-essential \
