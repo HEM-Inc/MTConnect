@@ -19,10 +19,7 @@ RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
 	curl \
-	apt-utils \
-	libxml2-dev \
-	libcppunit-dev \
-	build-essential \
+	g++ \
 	make \
 	cmake \
 	git \
@@ -36,8 +33,7 @@ RUN apt-get clean \
 # ---- Release ----
 ### Create folders, copy device files and dependencies for the release
 FROM ubuntu-base AS ubuntu-release
-LABEL author="skibum1869" description="Docker image for the latest MTConnect C++ Agent supplied \
-from the MTConnect Institute"
+LABEL author="skibum1869" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
 EXPOSE 5000:5000/tcp
 
 WORKDIR /MTC_Agent/
@@ -54,3 +50,9 @@ RUN chmod +x /MTC_Agent/agent && \
 	chmod +x /MTC_Agent/docker-entrypoint.sh
 ENTRYPOINT ["/bin/sh", "-x", "/MTC_Agent/docker-entrypoint.sh"]
 ### EOF
+
+
+	# apt-utils \
+	# libxml2-dev \
+	# libcppunit-dev \
+	# build-essential \
