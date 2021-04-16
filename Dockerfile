@@ -22,7 +22,7 @@ RUN apt-get clean \
 	make \
 	cmake \
 	git \
-	&& git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git /app_build/ \
+	&& git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/ \
 	&& cd /app_build/ \
 	&& git submodule init \
 	&& git submodule update \
