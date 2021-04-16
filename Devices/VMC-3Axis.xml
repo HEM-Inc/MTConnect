@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MTConnectDevices xmlns:m="urn:mtconnect.org:MTConnectDevices:1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:mtconnect.org:MTConnectDevices:1.5" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.5 http://www.mtconnect.org/schemas/MTConnectDevices_1.5.xsd">
-  <Header creationTime="2010-03-04T18:44:40+00:00" sender="localhost" instanceId="1267728234" bufferSize="131072" version="1.5"/>
+<MTConnectDevices xmlns:m="urn:mtconnect.org:MTConnectDevices:1.7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:mtconnect.org:MTConnectDevices:1.7" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.7 http://www.mtconnect.org/schemas/MTConnectDevices_1.7.xsd">
+  <Header creationTime="2010-03-04T18:44:40+00:00" sender="localhost" instanceId="1267728234" bufferSize="131072" version="1.7"/>
   <Devices>
     <Device id="dev" iso841Class="6" name="VMC-3Axis" sampleInterval="10" uuid="000">
       <Description manufacturer="SystemInsights"/>
