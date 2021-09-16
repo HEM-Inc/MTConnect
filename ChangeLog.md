@@ -5,3 +5,4 @@
 - 16/04/2021 = Release version 1.7.0 using 1.7.0.2 agent
 - 11/08/2021 = Release version 1.7.0 using 1.7.0.3 agent
 - 16/09/2021 = Release version 1.7.0 using 1.7.0.4 agent
+- 16/09/2021 = Release version 1.7.0 using 1.7.0.5 agent
