@@ -38,7 +38,7 @@ EXPOSE 5000:5000/tcp
 WORKDIR /MTC_Agent/
 # COPY <src> <dest>
 COPY agent.cfg docker-entrypoint.sh /MTC_Agent/
-COPY ./Devices/ /MTC_Agent/
+COPY ./Devices/ /MTC_Agent/devices
 COPY ./Assets/ /MTC_Agent/assets
 COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
 COPY --from=ubuntu-core app_build/simulator/ /MTC_Agent/simulator
