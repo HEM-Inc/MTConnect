@@ -1,33 +1,29 @@
 #!/bin/sh
-### Ubuntu instance
+### Ubuntu Version
 
-# ---- Base Node ----
-# This dockerfile defines the expected runtime environment before the project is installed
+
+# ---- Ubuntu instance ----
 FROM ubuntu:latest AS ubuntu-base
-# FROM debian:latest AS base
 ENV DEBIAN_FRONTEND=noninteractive
 
-# ---- Core ----
-### Application compile
-FROM ubuntu-base AS ubuntu-core
 
+# ---- Ubuntu make ----
+FROM ubuntu-base AS ubuntu-core
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
-	curl
-RUN apt-get clean \
-	&& apt-get update \
-	&& apt-get install -y \
-	g++ \
-	make \
-	cmake \
-	git \
-	&& git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/ \
-	&& cd /app_build/ \
-	&& git submodule init \
-	&& git submodule update \
-	&& cmake -G 'Unix Makefiles' . \
-	&& make
+	build-essential python3.9 python3-pip git cmake make \
+	&& python3.9 -m pip install conan
+
+RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
+
+RUN cd /app_build/ \
+	&& conan export conan/mqtt_cpp/ \
+	&& conan install . -if build --build=missing -pr conan/profiles/docker
+
+RUN	cd /app_build/ \
+	&& conan build . -bf build
+
 
 # ---- Release ----
 ### Create folders, copy device files and dependencies for the release
@@ -36,17 +32,16 @@ LABEL author="skibum1869" description="Ubuntu based docker image for the latest 
 EXPOSE 5000:5000/tcp
 
 WORKDIR /MTC_Agent/
-# COPY <src> <dest>
-COPY agent.cfg docker-entrypoint.sh /MTC_Agent/
-COPY ./Devices/ /MTC_Agent/devices
-COPY ./Assets/ /MTC_Agent/assets
-COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
+COPY agent.cfg /MTC_Agent/
+COPY ./mtconnect-devicefiles/Devices/ /MTC_Agent/devices/
+COPY ./mtconnect-devicefiles/Assets/ /MTC_Agent/assets
+COPY docker-entrypoint.sh /MTC_Agent/
 COPY --from=ubuntu-core app_build/simulator/ /MTC_Agent/simulator
+COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
 COPY --from=ubuntu-core app_build/styles/ /MTC_Agent/styles
-COPY --from=ubuntu-core app_build/agent/agent /MTC_Agent/
-
-# Set permission on the folder
+COPY --from=ubuntu-core app_build/build/bin/agent /MTC_Agent/agent
 RUN chmod +x /MTC_Agent/agent && \
 	chmod +x /MTC_Agent/docker-entrypoint.sh
 ENTRYPOINT ["/bin/sh", "-x", "/MTC_Agent/docker-entrypoint.sh"]
+
 ### EOF
