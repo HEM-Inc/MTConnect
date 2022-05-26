@@ -19,6 +19,7 @@ RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppag
 
 RUN cd /app_build/ \
 	&& conan export conan/mqtt_cpp/ \
+	&& conan export conan/mruby/ \
 	&& conan install . -if build --build=missing -pr conan/profiles/docker
 
 RUN	cd /app_build/ \
