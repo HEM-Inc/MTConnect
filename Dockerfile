@@ -12,7 +12,7 @@ FROM ubuntu-base AS ubuntu-core
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
-	build-essential python3.10 python3-pip git cmake make \
+	build-essential python3.10 python3-pip git cmake make rake\
 	&& python3.10 -m pip install conan
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
