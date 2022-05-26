@@ -3,7 +3,7 @@
 
 
 # ---- Ubuntu instance ----
-FROM ubuntu:20.04 AS ubuntu-base
+FROM ubuntu:latest AS ubuntu-base
 ENV DEBIAN_FRONTEND=noninteractive
 
 
@@ -12,8 +12,8 @@ FROM ubuntu-base AS ubuntu-core
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
-	build-essential python3.9 python3-pip git cmake make \
-	&& python3.9 -m pip install conan
+	build-essential python3.10 python3-pip git cmake make \
+	&& python3.10 -m pip install conan
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
