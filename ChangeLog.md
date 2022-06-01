@@ -10,4 +10,4 @@
 - 5/10/2021 = Release version 1.7.0.7 using 1.7.0.7 agent
 - 30/12/2021 = Release version 1.8.0.2 using 1.8.0.2 agent
 - 18/04/2022 = Release version 1.8.0.3 using 1.8.0.3 agent
-- 31/05/2022 = Release version 2.0.0.5 using 2.0.0.5 agent
+- 31/05/2022 = Release version 2.0.0 using 2.0.0 agent
