@@ -20,7 +20,7 @@ RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppag
 RUN cd /app_build/ \
 	&& conan export conan/mqtt_cpp/ \
 	&& conan export conan/mruby/ \
-	&& conan install . -if build --build=missing -pr conan/profiles/docker
+	&& conan install . -if build --build=missing -pr conan/profiles/docker -o with_ruby=True
 
 RUN	cd /app_build/ \
 	&& conan build . -bf build
@@ -31,6 +31,10 @@ RUN	cd /app_build/ \
 FROM ubuntu-base AS ubuntu-release
 LABEL author="skibum1869" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
 EXPOSE 5000:5000/tcp
+
+RUN apt-get clean \
+	&& apt-get update \
+	&& apt-get install -y ruby
 
 WORKDIR /MTC_Agent/
 COPY agent.cfg /MTC_Agent/

@@ -56,10 +56,10 @@ services:
     container_name: MTConnect_Agent
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: ./log/adapter.log
-        target: /MTC_Agent/adapter.log
-        consistency: delegated
+      - './agent.cfg:/MTC_Agent/agent.cfg'
+      - './devicefiles/Devices/:/MTC_Agent/devices'
+      - './devicefiles/Assets/:/MTC_Agent/assets'
+      - './devicefiles/Ruby/:/MTC_Agent/ruby'
 ```
 
 # Running from DockerHub
@@ -86,13 +86,10 @@ services:
     working_dir: "/MTC_Agent"
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: ./log/adapter.log
-        target: /MTC_Agent/adapter.log
-        consistency: delegated
       - './agent.cfg:/MTC_Agent/agent.cfg'
-      - './mtconnect-devicefiles/Devices/:/MTC_Agent/devices'
-      - './mtconnect-devicefiles/Assets/:/MTC_Agent/assets'
+      - './devicefiles/Devices/:/MTC_Agent/devices'
+      - './devicefiles/Assets/:/MTC_Agent/assets'
+      - './devicefiles/Ruby/:/MTC_Agent/ruby'
 ```
 
 # Core Docker and MTConnect Commands
@@ -107,19 +104,14 @@ docker build . -t "mtc_agent:latest"
 docker run --name agent --rm -it mtc_agent
 ```
 
-## Clear all images and containers
-```bash
-docker system prune -a
-```
-
-## Git pull latest and ignore local changes
+## To build the docker-compose file:
 ``` bash
-git reset --hard | sudo git pull
-```
+docker-compose build
+````
 
 ## To run the docker-compose file:
 ``` bash
-docker-compose up --force-recreate --build --remove-orphans -d
+docker-compose up --remove-orphans -d
 ```
 
 ## To shutdown the docker-compose instance
@@ -128,9 +120,8 @@ docker-compose down
 ```
 
 ## Access the log files
-From the pwd type the following:
 ```bash
-grep (what are you searching for) log/adapter.log
+docker-compose logs
 ```
 
 ## Pushing Assets
