@@ -99,7 +99,7 @@ services:
 docker build . -t "mtc_agent:latest"
 ```
 
-## Run the docker image
+## Run the docker image in interactive mode:
 ```bash
 docker run --name agent --rm -it mtc_agent
 ```
@@ -109,7 +109,7 @@ docker run --name agent --rm -it mtc_agent
 docker-compose build
 ````
 
-## To run the docker-compose file:
+## To run the docker-compose file detached and removing any orphaned containers:
 ``` bash
 docker-compose up --remove-orphans -d
 ```
@@ -119,10 +119,26 @@ docker-compose up --remove-orphans -d
 docker-compose down
 ```
 
-## Access the log files
+## Access the logs
 ```bash
 docker-compose logs
 ```
+
+## MTConnect agent usage
+```bash
+agent [help|install|debug|run] [configuration_file]
+   help           Prints this message
+   install        Installs the service
+   remove         Remove the service
+   debug          Runs the agent on the command line with verbose logging
+   run            Runs the agent on the command line
+   config_file    The configuration file to load
+                  Default: agent.cfg in current directory
+````
+
+When the agent is started without any arguments it is assumed it will be running as a service and will begin the service initialization sequence. The full path to the configuration file is stored in the registry in the following location:
+
+```\\HKEY_LOCAL_MACHINE\SOFTWARE\MTConnect\MTConnect Agent\ConfigurationFile```
 
 ## Pushing Assets
 To push the asset you need to be in the source folder of the asset.
