@@ -40,6 +40,7 @@ WORKDIR /MTC_Agent/
 COPY agent.cfg /MTC_Agent/
 COPY ./Devices/ /MTC_Agent/devices/
 COPY ./Assets/ /MTC_Agent/assets
+Copy ./Ruby/ /MTC_Agent/ruby
 COPY docker-entrypoint.sh /MTC_Agent/
 COPY --from=ubuntu-core app_build/simulator/ /MTC_Agent/simulator
 COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
