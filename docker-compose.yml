@@ -3,6 +3,7 @@ services:
   agent:
     container_name: MTConnect_Agent
     build: .
+    user: agent
     environment:
       - TZ=Etc/UTC
       - DEBIAN_FRONTEND=noninteractive
@@ -11,10 +12,11 @@ services:
         published: 5000
         protocol: tcp
         mode: host
-    entrypoint: "/bin/sh -x ./docker-entrypoint.sh"
-    working_dir: "/MTC_Agent/"
+    entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
+    working_dir: "/etc/MTC_Agent/"
     restart: unless-stopped
     volumes:
-      - './agent.cfg:/MTC_Agent/agent.cfg'
-      - './mtconnect-devicefiles/Devices/:/MTC_Agent/devices'
-      - './mtconnect-devicefiles/Assets/:/MTC_Agent/assets'
+      - './agent.cfg:/etc/MTC_Agent/agent.cfg'
+      - './mtconnect-devicefiles/Devices/:/etc/MTC_Agent/devices'
+      - './mtconnect-devicefiles/Assets/:/etc/MTC_Agent/assets'
+      - './mtconnect-devicefiles/Ruby/:/etc/MTC_Agent/ruby'

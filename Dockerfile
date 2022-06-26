@@ -36,18 +36,31 @@ RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y ruby
 
-WORKDIR /MTC_Agent/
-COPY agent.cfg /MTC_Agent/
-COPY ./Devices/ /MTC_Agent/devices/
-COPY ./Assets/ /MTC_Agent/assets
-Copy ./Ruby/ /MTC_Agent/ruby
-COPY docker-entrypoint.sh /MTC_Agent/
-COPY --from=ubuntu-core app_build/simulator/ /MTC_Agent/simulator
-COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
-COPY --from=ubuntu-core app_build/styles/ /MTC_Agent/styles
-COPY --from=ubuntu-core app_build/build/bin/agent /MTC_Agent/agent
-RUN chmod +x /MTC_Agent/agent && \
-	chmod +x /MTC_Agent/docker-entrypoint.sh
-ENTRYPOINT ["/bin/sh", "-x", "/MTC_Agent/docker-entrypoint.sh"]
+
+# change to a new non-root user for better security.
+# this also adds the user to a group with the same name.
+# --create-home creates a home folder, ie /home/<username>
+RUN useradd --create-home agent
+USER agent
+WORKDIR /etc/MTC_Agent/
+
+# install agent executable
+COPY --chown=agent:agent --from=ubuntu-core app_build/build/bin/agent /usr/local/bin/
+
+# copy custom data files and folders to /etc/MTC_Agent/*
+COPY --chown=agent:agent agent.cfg /etc/MTC_Agent/
+COPY --chown=agent:agent docker-entrypoint.sh /etc/MTC_Agent/
+COPY --chown=agent:agent ./Devices/ /etc/MTC_Agent/devices/
+COPY --chown=agent:agent ./Assets/ /etc/MTC_Agent/assets
+Copy --chown=agent:agent ./Ruby/ /etc/MTC_Agent/ruby
+
+# copy data from the cppagent repo to /etc/MTC_Agent/*
+COPY --chown=agent:agent --from=ubuntu-core app_build/simulator/ /etc/MTC_Agent/simulator
+COPY --chown=agent:agent --from=ubuntu-core app_build/schemas/ /etc/MTC_Agent/schemas
+COPY --chown=agent:agent --from=ubuntu-core app_build/styles/ /etc/MTC_Agent/styles
+
+RUN chmod +x /etc/MTC_Agent/agent && \
+	chmod +x /etc/MTC_Agent/docker-entrypoint.sh
+ENTRYPOINT ["/bin/sh", "-x", "/etc/MTC_Agent/docker-entrypoint.sh"]
 
 ### EOF
