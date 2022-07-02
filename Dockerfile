@@ -59,7 +59,7 @@ COPY --chown=agent:agent --from=ubuntu-core app_build/simulator/ /etc/MTC_Agent/
 COPY --chown=agent:agent --from=ubuntu-core app_build/schemas/ /etc/MTC_Agent/schemas
 COPY --chown=agent:agent --from=ubuntu-core app_build/styles/ /etc/MTC_Agent/styles
 
-RUN chmod +x /etc/MTC_Agent/agent && \
+RUN chmod +x /usr/local/bin/agent && \
 	chmod +x /etc/MTC_Agent/docker-entrypoint.sh
 ENTRYPOINT ["/bin/sh", "-x", "/etc/MTC_Agent/docker-entrypoint.sh"]
 
