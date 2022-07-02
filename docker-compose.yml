@@ -17,6 +17,6 @@ services:
     restart: unless-stopped
     volumes:
       - './agent.cfg:/etc/MTC_Agent/agent.cfg'
-      - './mtconnect-devicefiles/Devices/:/etc/MTC_Agent/devices'
-      - './mtconnect-devicefiles/Assets/:/etc/MTC_Agent/assets'
-      - './mtconnect-devicefiles/Ruby/:/etc/MTC_Agent/ruby'
+      - './Devices/:/etc/MTC_Agent/devices'
+      - './Assets/:/etc/MTC_Agent/assets'
+      - './Ruby/:/etc/MTC_Agent/ruby'
