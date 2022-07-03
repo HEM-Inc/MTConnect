@@ -41,25 +41,26 @@ To edit the instance settings use the docker-compose.yml file.
 ```yml
 version: '3.5'
 services:
-  web:
+  agent:
+    container_name: MTConnect_Agent
     build: .
+    user: agent
     environment:
       - TZ=Etc/UTC
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - target: 5000
-        published: 5000
+        published: 5001
         protocol: tcp
         mode: host
-    entrypoint: "/bin/sh -x docker-entrypoint.sh"
-    working_dir: "/MTC_Agent/"
-    container_name: MTConnect_Agent
+    entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
+    working_dir: "/etc/MTC_Agent/"
     restart: unless-stopped
     volumes:
-      - './agent.cfg:/MTC_Agent/agent.cfg'
-      - './devicefiles/Devices/:/MTC_Agent/devices'
-      - './devicefiles/Assets/:/MTC_Agent/assets'
-      - './devicefiles/Ruby/:/MTC_Agent/ruby'
+      - './agent.cfg:/etc/MTC_Agent/agent.cfg'
+      - './Devices/:/etc/MTC_Agent/devices'
+      - './Assets/:/etc/MTC_Agent/assets'
+      - './Ruby/:/etc/MTC_Agent/ruby'
 ```
 
 # Running from DockerHub
@@ -75,21 +76,23 @@ services:
   agent:
     container_name: MTConnect_Agent
     image: skibum1869/mtconnect_ubuntu_agent:latest
+    user: agent
     environment:
       - TZ=Etc/UTC
+      - DEBIAN_FRONTEND=noninteractive
     ports: 
       - target: 5000
-        published: 5000
+        published: 5001
         protocol: tcp
         mode: host
-    entrypoint: "/bin/sh -x ./docker-entrypoint.sh"
-    working_dir: "/MTC_Agent"
+    entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
+    working_dir: "/etc/MTC_Agent/"
     restart: unless-stopped
     volumes:
-      - './agent.cfg:/MTC_Agent/agent.cfg'
-      - './devicefiles/Devices/:/MTC_Agent/devices'
-      - './devicefiles/Assets/:/MTC_Agent/assets'
-      - './devicefiles/Ruby/:/MTC_Agent/ruby'
+      - './agent.cfg:/etc/MTC_Agent/agent.cfg'
+      - './Devices/:/etc/MTC_Agent/devices'
+      - './Assets/:/etc/MTC_Agent/assets'
+      - './Ruby/:/etc/MTC_Agent/ruby'
 ```
 
 # Core Docker and MTConnect Commands

@@ -9,18 +9,26 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # ---- Ubuntu make ----
 FROM ubuntu-base AS ubuntu-core
+ENV PythonVersion=3.10
+ENV PATH=$HOME/venv$PythonVersion/bin:$PATH
+
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
-	build-essential python3.10 python3-pip git cmake make rake\
-	&& python3.10 -m pip install conan
+	build-essential python$PythonVersion python3-pip git cmake make rake\
+	&& python$PythonVersion -m pip install conan
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
 RUN cd /app_build/ \
 	&& conan export conan/mqtt_cpp/ \
-	&& conan export conan/mruby/ \
-	&& conan install . -if build --build=missing -pr conan/profiles/docker -o with_ruby=True
+	&& conan export conan/mruby/ 
+	
+RUN cd /app_build/ \
+	&& conan install . -if build --build=missing \
+	-pr conan/profiles/docker \
+	-o run_tests=False \
+	-o with_ruby=True
 
 RUN	cd /app_build/ \
 	&& conan build . -bf build
