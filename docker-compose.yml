@@ -9,7 +9,7 @@ services:
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - target: 5000
-        published: 5001
+        published: 5000
         protocol: tcp
         mode: host
     entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
