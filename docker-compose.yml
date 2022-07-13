@@ -8,10 +8,7 @@ services:
       - TZ=Etc/UTC
       - DEBIAN_FRONTEND=noninteractive
     ports: 
-      - target: 5000
-        published: 5000
-        protocol: tcp
-        mode: host
+      - 5000-5010:5000/tcp
     entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
     working_dir: "/etc/MTC_Agent/"
     restart: unless-stopped
