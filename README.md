@@ -22,7 +22,6 @@ EXPOSE 5000:5000/tcp
 
 WORKDIR /MTC_Agent/
 # COPY <src> <dest>
-COPY agent.cfg docker-entrypoint.sh /MTC_Agent/
 COPY ./Devices/ /MTC_Agent/
 COPY ./Assets/ /MTC_Agent/assets
 COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
@@ -33,7 +32,7 @@ COPY --from=ubuntu-core app_build/agent/agent /MTC_Agent/
 # Set permission on the folder
 RUN chmod +x /MTC_Agent/agent && \
   chmod +x /MTC_Agent/docker-entrypoint.sh
-ENTRYPOINT ["/bin/sh", "-x", "/MTC_Agent/docker-entrypoint.sh"]
+ENTRYPOINT ["agent run agent.cfg"]
 ### EOF
 ```
 
@@ -50,10 +49,10 @@ services:
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - target: 5000
-        published: 5001
+        published: 5000
         protocol: tcp
         mode: host
-    entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
+    entrypoint: "agent run agent.cfg"
     working_dir: "/etc/MTC_Agent/"
     restart: unless-stopped
     volumes:
@@ -82,10 +81,10 @@ services:
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - target: 5000
-        published: 5001
+        published: 5000
         protocol: tcp
         mode: host
-    entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
+    entrypoint: "agent run agent.cfg"
     working_dir: "/etc/MTC_Agent/"
     restart: unless-stopped
     volumes:

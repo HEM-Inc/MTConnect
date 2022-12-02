@@ -9,7 +9,7 @@ services:
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - 5000-5010:5000/tcp
-    entrypoint: "/bin/sh -x /etc/MTC_Agent/docker-entrypoint.sh"
+    entrypoint: "agent run agent.cfg"
     working_dir: "/etc/MTC_Agent/"
     restart: unless-stopped
     volumes:

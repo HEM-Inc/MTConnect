@@ -57,7 +57,6 @@ COPY --chown=agent:agent --from=ubuntu-core app_build/build/bin/agent /usr/local
 
 # copy custom data files and folders to /etc/MTC_Agent/*
 COPY --chown=agent:agent agent.cfg /etc/MTC_Agent/
-COPY --chown=agent:agent docker-entrypoint.sh /etc/MTC_Agent/
 COPY --chown=agent:agent ./Devices/ /etc/MTC_Agent/devices/
 COPY --chown=agent:agent ./Assets/ /etc/MTC_Agent/assets
 Copy --chown=agent:agent ./Ruby/ /etc/MTC_Agent/ruby
@@ -67,8 +66,7 @@ COPY --chown=agent:agent --from=ubuntu-core app_build/simulator/ /etc/MTC_Agent/
 COPY --chown=agent:agent --from=ubuntu-core app_build/schemas/ /etc/MTC_Agent/schemas
 COPY --chown=agent:agent --from=ubuntu-core app_build/styles/ /etc/MTC_Agent/styles
 
-RUN chmod +x /usr/local/bin/agent && \
-	chmod +x /etc/MTC_Agent/docker-entrypoint.sh
-ENTRYPOINT ["/bin/sh", "-x", "/etc/MTC_Agent/docker-entrypoint.sh"]
+RUN chmod +x /usr/local/bin/agent
+ENTRYPOINT ["agent run agent.cfg"]
 
 ### EOF
