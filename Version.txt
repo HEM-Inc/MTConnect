@@ -1,2 +1,2 @@
-MTConnect: 2.0.0
-Project: 2.0.0.12
+MTConnect: 2.1.0
+Project: 2.1.0.1
