@@ -51,7 +51,7 @@ RUN touch /etc/mosquitto/passwd \
 
 # copy mosquitto files from mqtt folder to /etc/mosquitto/*
 COPY ./mqtt/acl /etc/mosquitto/acl
-COPY ./mqtt/Mosquitto /etc/mosquitto/conf.d/
+COPY ./mqtt/mosquitto.conf /etc/mosquitto/conf.d/
 
 
 # change to a new non-root user for better security.
