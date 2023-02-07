@@ -40,8 +40,7 @@ FROM ubuntu-base AS ubuntu-release
 LABEL author="skibum1869" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
 EXPOSE 5000:5000/tcp
 
-RUN apt-add-repository ppa:mosquitto-dev/mosquitto-ppa \
-	&& apt-get clean \
+RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
 	ruby mosquitto mosquitto-clients
