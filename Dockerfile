@@ -39,6 +39,7 @@ RUN	cd /app_build/ \
 FROM ubuntu-base AS ubuntu-release
 LABEL author="skibum1869" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
 EXPOSE 5000:5000/tcp
+EXPOSE 1883:1883/tcp
 
 RUN apt-get clean \
 	&& apt-get update \
