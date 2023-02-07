@@ -18,3 +18,4 @@ services:
       - './Devices/:/etc/MTC_Agent/devices'
       - './Assets/:/etc/MTC_Agent/assets'
       - './Ruby/:/etc/MTC_Agent/ruby'
+      - './mqtt/:/etc/mosquitto'

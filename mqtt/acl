@@ -1,0 +1,10 @@
+# Allow anonymous access to the sys
+topic read $SYS/#
+
+# Allow anonymous to read MTConnect
+# topic read mtconnect/#
+topic mtconnect/#
+
+# Allow secure readwrite to the broker from MTConnect using the mtconnect user
+# user mtconnect
+# topic mtconnect/#
