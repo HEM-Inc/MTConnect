@@ -3,7 +3,7 @@
 
 
 # ---- Ubuntu instance ----
-FROM ubuntu:22.04 AS ubuntu-base
+FROM ubuntu:23.04 AS ubuntu-base
 ENV DEBIAN_FRONTEND=noninteractive
 
 
