@@ -15,8 +15,14 @@ ENV PATH=$HOME/venv$PythonVersion/bin:$PATH
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
-	build-essential python$PythonVersion python3-pip git cmake make rake\
-	&& python$PythonVersion -m pip install conan -v "conan==1.59.0"
+	build-essential git cmake make rake\
+	python$PythonVersion python3-pip python3-venv\
+	python$PythonVersion -m pip install virtualenv\
+	python$PythonVersion -m virtualenv virenv
+
+RUN source virenv\bin\activate
+
+RUN python$PythonVersion -m pip install conan -v "conan==1.59.0"
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
