@@ -16,7 +16,7 @@ RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
 	build-essential git cmake make rake\
-	python$PythonVersion python3-pip python3-venv\
+	python$PythonVersion python3-pip\
 	python$PythonVersion -m pip install virtualenv\
 	python$PythonVersion -m virtualenv virenv
 
