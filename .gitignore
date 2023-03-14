@@ -1,5 +1,6 @@
 # local files
 .DS_Store
+.icloud
 
 # VIM
 .*.swp
