@@ -20,8 +20,7 @@ RUN apt-get clean \
 	python$PythonVersion-venv
 
 RUN python$PythonVersion -m venv tempenv \
-	&& ls \
-	&& source tempenv\bin\activate
+	&& . \tempenv\bin\activate
 
 RUN python$PythonVersion -m pip install conan -v "conan==1.59.0"
 
