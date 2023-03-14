@@ -16,7 +16,8 @@ RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
 	build-essential git cmake make rake \
-	python$PythonVersion python3-pip
+	python$PythonVersion python3-pip \
+	python$PythonVersion-venv
 
 RUN python$PythonVersion -m venv tempenv \
 	&& ls \
