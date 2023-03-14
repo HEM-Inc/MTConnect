@@ -16,10 +16,10 @@ RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
 	build-essential git cmake make rake \
-	python$PythonVersion python3-pip \
-	&& python$PythonVersion -m pip install virtualenv
+	python$PythonVersion python3-pip
 
-RUN python$PythonVersion -m virtualenv tempenv \
+RUN python$PythonVersion -m venv tempenv \
+	&& ls \
 	&& source tempenv\bin\activate
 
 RUN python$PythonVersion -m pip install conan -v "conan==1.59.0"
