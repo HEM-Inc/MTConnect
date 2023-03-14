@@ -9,17 +9,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # ---- Ubuntu make ----
 FROM ubuntu-base AS ubuntu-core
-ENV PythonVersion=3.10
+ENV PythonVersion=3.11
 ENV PATH=$HOME/venv$PythonVersion/bin:$PATH
 
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
-	build-essential git cmake make rake\
-	python$PythonVersion python3-pip\
-	python$PythonVersion -m pip install virtualenv
-	
-RUN virtualenv tempenv
+	build-essential git cmake make rake \
+	python$PythonVersion python3-pip \
+	&& python$PythonVersion -m pip install virtualenv \
+	&& python$PythonVersion -m virtualenv tempenv
 
 RUN source tempenv\bin\activate
 
