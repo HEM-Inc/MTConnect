@@ -22,7 +22,7 @@ RUN apt-get clean \
 RUN python$PythonVersion -m venv tempenv \
 	&& . /tempenv/bin/activate
 
-RUN python$PythonVersion -m pip install conan -v "conan==1.59.0"
+RUN python -m pip install "conan==1.59.0"
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
