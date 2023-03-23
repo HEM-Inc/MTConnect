@@ -18,7 +18,12 @@ RUN apt-get clean \
 	build-essential git cmake make rake \
 	autoconf automake \
 	python$PythonVersion python3-pip \
-	&& python$PythonVersion -m pip install "conan==1.59.0"
+	python$PythonVersion-venv
+
+RUN python$PythonVersion -m venv tempenv \
+	&& . /tempenv/bin/activate
+
+RUN python -m pip install "conan==1.59.0"
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
