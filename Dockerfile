@@ -16,6 +16,7 @@ RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
 	build-essential git cmake make rake \
+	autoconf automake \
 	python$PythonVersion python3-pip \
 	python$PythonVersion-venv
 
