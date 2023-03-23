@@ -19,7 +19,7 @@ RUN apt-get clean \
 	autoconf automake \
 	python$PythonVersion python3-pip \
 	python$PythonVersion-venv \
-	&& pip install "conan==1.59.0"
+	&& python$PythonVersion -m pip install "conan==1.59.0" --break-system-packages
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
