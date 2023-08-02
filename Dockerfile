@@ -38,7 +38,8 @@ RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppag
 RUN cd /app_build/ \
 	&& conan export conan/mqtt_cpp \
 	&& conan export conan/mruby \
-	&& conan build . -pr $CONAN_PROFILE \
+	&& conan build . \
+	--profile:build=$CONAN_PROFILE \
 	-o build_tests=$WITH_TESTS \
 	-o run_tests=$WITH_TESTS \
 	-o with_ruby=$WITH_RUBY \
