@@ -3,7 +3,7 @@
 
 
 # ---- Ubuntu instance ----
-FROM ubuntu:23.10 AS ubuntu-base
+FROM ubuntu:22.04 AS ubuntu-base
 ENV DEBIAN_FRONTEND=noninteractive
 
 
@@ -12,6 +12,17 @@ FROM ubuntu-base AS ubuntu-core
 ENV PythonVersion=3.11
 ENV PATH=$HOME/venv$PythonVersion/bin:$PATH
 
+# set some variables
+ENV PATH=$HOME/venv3.9/bin:$PATH
+ENV CONAN_PROFILE=conan/profiles/docker
+ENV WITH_RUBY=True
+ENV WITH_TESTS=False
+
+# limit cpus so don't run out of memory on local machine
+# symptom: get error - "c++: fatal error: Killed signal terminated program cc1plus"
+# can turn off if building in cloud
+ENV CONAN_CPU_COUNT=1
+
 RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get install -y \
@@ -19,22 +30,19 @@ RUN apt-get clean \
 	autoconf automake \
 	python$PythonVersion python3-pip \
 	python$PythonVersion-venv \
-	&& python$PythonVersion -m pip install "conan==1.59.0" --break-system-packages
+	&& python$PythonVersion -m pip install conan \
+	&& echo 'export PATH=$HOME/.local/bin:$PATH' >> .bashrc
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
 RUN cd /app_build/ \
-	&& conan export conan/mqtt_cpp/ \
-	&& conan export conan/mruby/ 
-	
-RUN cd /app_build/ \
-	&& conan install . -if build --build=missing \
-	-pr conan/profiles/docker \
-	-o run_tests=False \
-	-o with_ruby=True
-
-RUN	cd /app_build/ \
-	&& conan build . -bf build
+	&& conan export conan/mqtt_cpp \
+	&& conan export conan/mruby \
+	&& conan build . -pr $CONAN_PROFILE \
+	-o build_tests=$WITH_TESTS \
+	-o run_tests=$WITH_TESTS \
+	-o with_ruby=$WITH_RUBY
+	--build=missing
 
 
 # ---- Release ----
@@ -55,7 +63,6 @@ RUN touch /etc/mosquitto/passwd \
 # copy mosquitto files from mqtt folder to /etc/mosquitto/*
 COPY ./mqtt/acl /etc/mosquitto/acl
 COPY ./mqtt/mosquitto.conf /etc/mosquitto/conf.d/
-
 
 # change to a new non-root user for better security.
 # this also adds the user to a group with the same name.
