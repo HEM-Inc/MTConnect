@@ -41,7 +41,7 @@ RUN cd /app_build/ \
 	&& conan build . -pr $CONAN_PROFILE \
 	-o build_tests=$WITH_TESTS \
 	-o run_tests=$WITH_TESTS \
-	-o with_ruby=$WITH_RUBY
+	-o with_ruby=$WITH_RUBY \
 	--build=missing
 
 
