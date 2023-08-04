@@ -12,7 +12,7 @@ FROM ubuntu-base AS ubuntu-core
 ENV PythonVersion=3.11
 
 # set some variables
-ENV PATH=$HOME/venv$PythonVersion/bin:$PATH
+ENV VIRTUAL_ENV=/opt/venv
 ENV CONAN_PROFILE=conan/profiles/docker
 ENV WITH_RUBY=True
 
@@ -27,8 +27,11 @@ RUN apt-get clean \
 	build-essential git cmake make rake \
 	autoconf automake \
 	python$PythonVersion python3-pip \
-	python$PythonVersion-venv \
-	&& python$PythonVersion -m pip install  "conan==1.59.0"
+	python$PythonVersion-venv 
+	
+RUN python$PythonVersion -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+RUN python -m pip install  "conan==1.59.0"
 
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
