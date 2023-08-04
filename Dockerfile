@@ -33,11 +33,11 @@ RUN apt-get clean \
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
 RUN cd /app_build/ \
+	&& conan export conan/mqtt_cpp/ \
+	&& conan export conan/mruby/ \
 	&& conan install . -if build --build=missing \
 	-pr $CONAN_PROFILE \
 	-o with_ruby=$WITH_RUBY \
-	&& conan export conan/mqtt_cpp \
-	&& conan export conan/mruby \
 	&& conan build . -bf build
 
 
