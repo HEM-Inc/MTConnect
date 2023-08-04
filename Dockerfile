@@ -15,7 +15,6 @@ ENV PythonVersion=3.11
 ENV PATH=$HOME/venv$PythonVersion/bin:$PATH
 ENV CONAN_PROFILE=conan/profiles/docker
 ENV WITH_RUBY=True
-ENV WITH_TESTS=False
 
 # limit cpus so don't run out of memory on local machine
 # symptom: get error - "c++: fatal error: Killed signal terminated program cc1plus"
@@ -36,8 +35,6 @@ RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppag
 RUN cd /app_build/ \
 	&& conan install . -if build --build=missing \
 	-pr $CONAN_PROFILE \
-	-o build_tests=$WITH_TESTS \
-	-o run_tests=$WITH_TESTS \
 	-o with_ruby=$WITH_RUBY \
 	&& conan export conan/mqtt_cpp \
 	&& conan export conan/mruby \
