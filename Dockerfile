@@ -110,7 +110,7 @@ RUN set -x \
 	&& mkdir -p /etc/mtconnect/config \
 	          /etc/mtconnect/data \
 	          /etc/mtconnect/log \
-	&& chown -R agent:agent /mtconnect \
+	&& chown -R agent:agent /etc/mtconnect \
 	&& rm -r /etc/MTC_Agent
 
 WORKDIR /etc/mtconnect/
