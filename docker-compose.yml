@@ -30,6 +30,7 @@ services:
       - "./mqtt/:/mosquitto/config"
     ports:
       - 1883:1883/tcp
+    restart: unless-stopped
     networks:
       mtc_net:
         ipv4_address: 10.5.11.3
