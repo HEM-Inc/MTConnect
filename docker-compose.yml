@@ -27,7 +27,7 @@ services:
     hostname: mosquitto
     image: eclipse-mosquitto:latest
     volumes:
-      - "./mqtt/:/etc/mosquitto/"
+      - "./mqtt/:/mosquitto/config"
     ports:
       - 1883:1883/tcp
     networks:
