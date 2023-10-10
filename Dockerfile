@@ -104,7 +104,7 @@ COPY --chown=agent:agent --from=ubuntu-core /root/agent/mtcagent_dist.tar.gz /et
 RUN  tar -xf /etc/MTC_Agent/mtcagent_dist.tar.gz -C /etc/MTC_Agent/
 
 USER root
-RUN set -x 
+RUN set -x \
 	&& cp /etc/MTC_Agent/mtcagent_dist/bin/* /usr/bin \
 	&& cp /etc/MTC_Agent/mtcagent_dist/lib/* /usr/lib \
 	&& mkdir -p /etc/mtconnect/config \
