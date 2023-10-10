@@ -1,7 +1,8 @@
 version: '3.5'
 services:
   agent:
-    container_name: MTConnect_Agent
+    container_name: mtcagent
+    hostname: mtcagent
     build: .
     user: agent
     environment:
