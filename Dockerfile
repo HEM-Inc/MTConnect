@@ -4,6 +4,7 @@
 # ---- Ubuntu instance ----
 FROM ubuntu:22.04 AS ubuntu-base
 ENV DEBIAN_FRONTEND=noninteractive
+SHELL ["/bin/bash", "-c"]
 
 
 # ---- Ubuntu make ----
