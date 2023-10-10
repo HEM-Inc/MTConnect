@@ -73,26 +73,11 @@ RUN python$PythonVersion -m venv temp-venv \
 FROM ubuntu-base AS ubuntu-release
 LABEL author="HEMsaw" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
 EXPOSE 5000:5000/tcp
-EXPOSE 1883:1883/tcp
-
-USER root
-
-RUN apt-get clean \
-	&& apt-get update \
-	&& apt-get install -y \
-	ruby mosquitto mosquitto-clients
-
-RUN touch /etc/mosquitto/passwd \
-	&& mosquitto_passwd -b /etc/mosquitto/passwd mtconnect mtconnect
-
-# copy mosquitto files from mqtt folder to /etc/mosquitto/*
-COPY ./mqtt/acl /etc/mosquitto/acl
-COPY ./mqtt/mosquitto.conf /etc/mosquitto/conf.d/
-
 
 # change to a new non-root user for better security.
 # this also adds the user to a group with the same name.
 # --create-home creates a home folder, ie /home/<username>
+USER root
 RUN useradd --create-home agent
 USER agent
 WORKDIR /etc/MTC_Agent/

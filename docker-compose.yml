@@ -10,7 +10,6 @@ services:
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - 5000:5000/tcp
-      - 1883:1883/tcp
     entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
     working_dir: "/etc/mtconnect/"
     restart: unless-stopped
@@ -19,4 +18,25 @@ services:
       - './Devices/:/etc/mtconnect/data/devices'
       - './Assets/:/etc/mtconnect/data/assets'
       - './Ruby/:/etc/mtconnect/data/ruby'
-      - './mqtt/:/etc/mosquitto'
+    networks:
+      mtc_net:
+        ipv4_address: 10.5.11.2
+
+  mosquitto:
+    container_name: mosquitto
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    volumes:
+      - "./mqtt/:/etc/mosquitto/"
+    ports:
+      - 1883:1883/tcp
+    networks:
+      mtc_net:
+        ipv4_address: 10.5.11.3
+
+networks:
+  mtc_net:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.11.0/29
