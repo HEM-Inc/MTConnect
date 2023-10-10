@@ -127,7 +127,7 @@ COPY --chown=agent:agent ./Styles/ /etc/mtconnect/data/styles
 COPY --chown=agent:agent --from=ubuntu-core app_build/schemas/ /etc/mtconnect/data/schemas
 
 VOLUME ["/etc/mtconnect/config", "/etc/mtconnect/log", "/etc/mtconnect/data"]
-RUN chmod +x /usr/local/bin/agent
+RUN chmod +x /usr/bin/mtcagent
 ENTRYPOINT ["/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"]
 
 ### EOF
