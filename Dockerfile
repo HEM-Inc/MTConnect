@@ -78,6 +78,7 @@ EXPOSE 1883:1883/tcp
 USER root
 
 RUN apt-get clean \
+	&& apt-add-repository ppa:mosquitto-dev/mosquitto-ppa \
 	&& apt-get update \
 	&& apt-get install -y \
 	ruby mosquitto mosquitto-clients

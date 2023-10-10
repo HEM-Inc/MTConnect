@@ -10,12 +10,12 @@ services:
     ports: 
       - 5000:5000/tcp
       - 1883:1883/tcp
-    entrypoint: "agent run agent.cfg"
-    working_dir: "/etc/MTC_Agent/"
+    entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
+    working_dir: "/etc/mtconnect/"
     restart: unless-stopped
     volumes:
-      - './agent.cfg:/etc/MTC_Agent/agent.cfg'
-      - './Devices/:/etc/MTC_Agent/devices'
-      - './Assets/:/etc/MTC_Agent/assets'
-      - './Ruby/:/etc/MTC_Agent/ruby'
+      - './agent.cfg:/etc/mtconnect/data/agent.cfg'
+      - './Devices/:/etc/mtconnect/data/devices'
+      - './Assets/:/etc/mtconnect/data/assets'
+      - './Ruby/:/etc/mtconnect/data/ruby'
       - './mqtt/:/etc/mosquitto'

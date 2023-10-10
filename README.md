@@ -48,18 +48,17 @@ services:
       - TZ=Etc/UTC
       - DEBIAN_FRONTEND=noninteractive
     ports: 
-      - target: 5000
-        published: 5000
-        protocol: tcp
-        mode: host
-    entrypoint: "agent run agent.cfg"
-    working_dir: "/etc/MTC_Agent/"
+      - 5000:5000/tcp
+      - 1883:1883/tcp
+    entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
+    working_dir: "/etc/mtconnect/"
     restart: unless-stopped
     volumes:
-      - './agent.cfg:/etc/MTC_Agent/agent.cfg'
-      - './Devices/:/etc/MTC_Agent/devices'
-      - './Assets/:/etc/MTC_Agent/assets'
-      - './Ruby/:/etc/MTC_Agent/ruby'
+      - './agent.cfg:/etc/mtconnect/data/agent.cfg'
+      - './Devices/:/etc/mtconnect/data/devices'
+      - './Assets/:/etc/mtconnect/data/assets'
+      - './Ruby/:/etc/mtconnect/data/ruby'
+      - './mqtt/:/etc/mosquitto'
 ```
 
 # Running from DockerHub
@@ -80,18 +79,17 @@ services:
       - TZ=Etc/UTC
       - DEBIAN_FRONTEND=noninteractive
     ports: 
-      - target: 5000
-        published: 5000
-        protocol: tcp
-        mode: host
-    entrypoint: "agent run agent.cfg"
-    working_dir: "/etc/MTC_Agent/"
+      - 5000:5000/tcp
+      - 1883:1883/tcp
+    entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
+    working_dir: "/etc/mtconnect/"
     restart: unless-stopped
     volumes:
-      - './agent.cfg:/etc/MTC_Agent/agent.cfg'
-      - './Devices/:/etc/MTC_Agent/devices'
-      - './Assets/:/etc/MTC_Agent/assets'
-      - './Ruby/:/etc/MTC_Agent/ruby'
+      - './agent.cfg:/etc/mtconnect/data/agent.cfg'
+      - './Devices/:/etc/mtconnect/data/devices'
+      - './Assets/:/etc/mtconnect/data/assets'
+      - './Ruby/:/etc/mtconnect/data/ruby'
+      - './mqtt/:/etc/mosquitto'
 ```
 
 # Core Docker and MTConnect Commands
@@ -128,7 +126,7 @@ docker-compose logs
 
 ## MTConnect agent usage
 ```bash
-agent [help|install|debug|run] [configuration_file]
+mtcagent [help|install|debug|run] [configuration_file]
    help           Prints this message
    install        Installs the service
    remove         Remove the service
