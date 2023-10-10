@@ -11,7 +11,6 @@ FROM ubuntu-base AS ubuntu-core
 
 ARG CONAN_CPU_COUNT=2
 ARG WITH_RUBY='True'
-ARG CONAN_PROFILE='conan/profiles/gcc'
 ARG WITH_CPACK='True'
 ARG CPACK_DESTINANTION="/root/agent" 
 ARG CPACK_NAME='mtcagent_dist'
@@ -65,7 +64,7 @@ RUN if [ -z "$WITH_TESTS" ] || [ "$WITH_TESTS" = "false" ] || [ "$WITH_TESTS" = 
 	    -o "cpack_name=$CPACK_NAME" \
 	    -o cpack_generator=TGZ \
 	    -o "shared=$SHARED" \
-	    -pr "$CONAN_PROFILE" \
+	    -pr "conan/profiles/docker" \
 	    ${WITH_TESTS_ARG}
 
 
