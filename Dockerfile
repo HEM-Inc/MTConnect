@@ -38,22 +38,21 @@ RUN apt-get clean \
 	    ruby \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN python$PythonVersion -m venv temp-venv \
-	&& source temp-venv/bin/activate \
-	&& python -m pip install conan -v 'conan==2.0.9'
-
 RUN git clone --recurse-submodules --progress https://github.com/mtconnect/cppagent.git --depth 1 /app_build/
 
 WORKDIR /app_build/
 
-RUN conan export conan/mqtt_cpp/ \
-	&& conan export conan/mruby/ 
-	
-RUN if [ -z "$WITH_TESTS" ] || [ "$WITH_TESTS" = "false" ] || [ "$WITH_TESTS" = "False" ]; then \
-	    WITH_TESTS_ARG="--test-folder="; \
-	else \
-	    WITH_TESTS_ARG=""; \
-	fi \
+# Run the conan install and build
+RUN python$PythonVersion -m venv temp-venv \
+	&& source temp-venv/bin/activate \
+	&& python -m pip install conan -v 'conan==2.0.9' \
+	&& conan export conan/mqtt_cpp/ \
+	&& conan export conan/mruby/ \
+	&& if [ -z "$WITH_TESTS" ] || [ "$WITH_TESTS" = "false" ] || [ "$WITH_TESTS" = "False" ]; then \
+		    WITH_TESTS_ARG="--test-folder="; \
+		else \
+		    WITH_TESTS_ARG=""; \
+		fi \
 	&& conan profile detect \
 	&& conan create . \
 	    --build=missing \
