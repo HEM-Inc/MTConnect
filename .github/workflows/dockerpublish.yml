@@ -14,7 +14,7 @@ on:
       - "main"
 
 env:
-  app: MTConnect_Ubuntu_Agent
+  app: mtconnect
 
 jobs:
   docker:
