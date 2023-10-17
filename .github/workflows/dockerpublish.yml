@@ -2,13 +2,13 @@ name: Docker Publish
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
+    # Publish `main` as Docker `latest` image.
     branches:
-      - master
+      - main
 
     # Publish `2.1.2.3` tags as releases.
     tags:
-      - *.*.*.*
+      - "*.*.*.*"
 
 env:
   app: MTConnect_Ubuntu_Agent
