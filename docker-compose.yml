@@ -1,8 +1,8 @@
 version: '3.5'
 services:
   agent:
-    container_name: mtcagent
-    hostname: mtcagent
+    container_name: mtc_agent
+    hostname: mtc_agent
     build: .
     user: agent
     environment:
@@ -18,26 +18,15 @@ services:
       - './Devices/:/etc/mtconnect/data/devices'
       - './Assets/:/etc/mtconnect/data/assets'
       - './Ruby/:/etc/mtconnect/data/ruby'
-    networks:
-      mtc_net:
-        ipv4_address: 10.5.11.2
 
   mosquitto:
     container_name: mosquitto
     hostname: mosquitto
     image: eclipse-mosquitto:latest
     volumes:
-      - "./mqtt/:/mosquitto/config"
+      - "./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+      # - "./mqtt/mosquitto/passwd:/mosquitto/data/passwd"
+      - "./mqtt/mosquitto/acl:/mosquitto/data/acl"
     ports:
       - 1883:1883/tcp
     restart: unless-stopped
-    networks:
-      mtc_net:
-        ipv4_address: 10.5.11.3
-
-networks:
-  mtc_net:
-    driver: bridge
-    ipam:
-     config:
-       - subnet: 10.5.11.0/29

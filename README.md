@@ -8,7 +8,7 @@ This project will mirror the log file to the local machine for full trace loggin
 To run the project clone a local instance of the repo.
 
 ``` bash
-git clone https://github.com/skibum1869/MTConnect_Docker.git <name you want for the local repo>
+git clone https://github.com/HEM-Inc/MTConnect.git <name you want for the local repo>
 ```
 Edit the agent.cfg to meet your requirements and add any devices you need to the folder. This has been tested using subfolders for devises and Assets.
 To add asset definitions to the compiled project include the following line under the devises line see below.
@@ -17,7 +17,7 @@ To add asset definitions to the compiled project include the following line unde
 # ---- Release ----
 ### Create folders, copy device files and dependencies for the release
 FROM ubuntu-base AS ubuntu-release
-LABEL author="skibum1869" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
+LABEL author="HEMsaw" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
 EXPOSE 5000:5000/tcp
 
 WORKDIR /MTC_Agent/
@@ -41,7 +41,8 @@ To edit the instance settings use the docker-compose.yml file.
 version: '3.5'
 services:
   agent:
-    container_name: MTConnect_Agent
+    container_name: mtc_agent
+    hostname: mtc_agent
     build: .
     user: agent
     environment:
@@ -49,7 +50,6 @@ services:
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - 5000:5000/tcp
-      - 1883:1883/tcp
     entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
     working_dir: "/etc/mtconnect/"
     restart: unless-stopped
@@ -58,7 +58,19 @@ services:
       - './Devices/:/etc/mtconnect/data/devices'
       - './Assets/:/etc/mtconnect/data/assets'
       - './Ruby/:/etc/mtconnect/data/ruby'
-      - './mqtt/:/etc/mosquitto'
+
+  mosquitto:
+    container_name: mosquitto
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    volumes:
+      - "./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+      # - "./mqtt/mosquitto/passwd:/mosquitto/data/passwd"
+      - "./mqtt/mosquitto/acl:/mosquitto/data/acl"
+    ports:
+      - 1883:1883/tcp
+    restart: unless-stopped
+
 ```
 
 # Running from DockerHub
@@ -72,15 +84,15 @@ docker-compose.yml
 version: '3.5'
 services:
   agent:
-    container_name: MTConnect_Agent
-    image: skibum1869/mtconnect_ubuntu_agent:latest
+    container_name: mtc_agent
+    hostname: mtc_agent
+    image: hemsaw/mtconnect:latest
     user: agent
     environment:
       - TZ=Etc/UTC
       - DEBIAN_FRONTEND=noninteractive
     ports: 
       - 5000:5000/tcp
-      - 1883:1883/tcp
     entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
     working_dir: "/etc/mtconnect/"
     restart: unless-stopped
@@ -89,7 +101,19 @@ services:
       - './Devices/:/etc/mtconnect/data/devices'
       - './Assets/:/etc/mtconnect/data/assets'
       - './Ruby/:/etc/mtconnect/data/ruby'
-      - './mqtt/:/etc/mosquitto'
+
+  mosquitto:
+    container_name: mosquitto
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    volumes:
+      - "./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+      # - "./mqtt/mosquitto/passwd:/mosquitto/data/passwd"
+      - "./mqtt/mosquitto/acl:/mosquitto/data/acl"
+    ports:
+      - 1883:1883/tcp
+    restart: unless-stopped
+
 ```
 
 # Core Docker and MTConnect Commands
