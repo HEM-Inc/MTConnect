@@ -20,19 +20,45 @@ FROM ubuntu-base AS ubuntu-release
 LABEL author="HEMsaw" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
 EXPOSE 5000:5000/tcp
 
-WORKDIR /MTC_Agent/
-# COPY <src> <dest>
-COPY ./Devices/ /MTC_Agent/
-COPY ./Assets/ /MTC_Agent/assets
-COPY --from=ubuntu-core app_build/schemas/ /MTC_Agent/schemas
-COPY --from=ubuntu-core app_build/simulator/ /MTC_Agent/simulator
-COPY --from=ubuntu-core app_build/styles/ /MTC_Agent/styles
-COPY --from=ubuntu-core app_build/agent/agent /MTC_Agent/
+# change to a new non-root user for better security.
+# this also adds the user to a group with the same name.
+# --create-home creates a home folder, ie /home/<username>
+USER root
+RUN useradd --create-home agent
+USER agent
+WORKDIR /etc/MTC_Agent/
 
-# Set permission on the folder
-RUN chmod +x /MTC_Agent/agent && \
-  chmod +x /MTC_Agent/docker-entrypoint.sh
-ENTRYPOINT ["agent run agent.cfg"]
+# install agent executable
+COPY --chown=agent:agent --from=ubuntu-core /root/agent/mtcagent_dist.tar.gz /etc/MTC_Agent/
+
+# Extract the data
+RUN  tar -xf /etc/MTC_Agent/mtcagent_dist.tar.gz -C /etc/MTC_Agent/
+
+USER root
+RUN set -x \
+  && cp /etc/MTC_Agent/mtcagent_dist/bin/* /usr/bin \
+  && cp /etc/MTC_Agent/mtcagent_dist/lib/* /usr/lib \
+  && mkdir -p /etc/mtconnect/config \
+            /etc/mtconnect/data \
+            /etc/mtconnect/log \
+  && chown -R agent:agent /etc/mtconnect \
+  && rm -r /etc/MTC_Agent
+
+WORKDIR /etc/mtconnect/
+
+# copy custom data files and folders to /etc/MTC_Agent/*
+USER agent
+COPY --chown=agent:agent agent.cfg /etc/mtconnect/data/
+COPY --chown=agent:agent ./Devices/ /etc/mtconnect/data/devices/
+COPY --chown=agent:agent ./Assets/ /etc/mtconnect/data/assets
+Copy --chown=agent:agent ./Ruby/ /etc/mtconnect/data/ruby
+COPY --chown=agent:agent ./Styles/ /etc/mtconnect/data/styles
+
+# copy data from the cppagent repo to /etc/mtconnect/*
+COPY --chown=agent:agent --from=ubuntu-core app_build/schemas/ /etc/mtconnect/data/schemas
+
+VOLUME ["/etc/mtconnect/config", "/etc/mtconnect/log", "/etc/mtconnect/data"]
+ENTRYPOINT ["/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"]
 ### EOF
 ```
 
