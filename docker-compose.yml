@@ -1,32 +1,16 @@
 version: '3.5'
 services:
-  agent:
+  mtc_agent:
     container_name: mtc_agent
     hostname: mtc_agent
-    build: .
+    image: mtconnect/agent:latest
     user: agent
-    environment:
-      - TZ=Etc/UTC
-      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      - "/etc/mtconnect/config/:/mtconnect/config/"
+      - "/etc/mtconnect/data/:/mtconnect/data/"
+      - "/etc/mtconnect/log/:/mtconnect/log/"
     ports: 
       - 5000:5000/tcp
-    entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
-    working_dir: "/etc/mtconnect/"
-    restart: unless-stopped
-    volumes:
-      - './agent.cfg:/etc/mtconnect/data/agent.cfg'
-      - './Devices/:/etc/mtconnect/data/devices'
-      - './Assets/:/etc/mtconnect/data/assets'
-      - './Ruby/:/etc/mtconnect/data/ruby'
-
-  mosquitto:
-    container_name: mosquitto
-    hostname: mosquitto
-    image: eclipse-mosquitto:latest
-    volumes:
-      - "./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf"
-      # - "./mqtt/mosquitto/passwd:/mosquitto/data/passwd"
-      - "./mqtt/mosquitto/acl:/mosquitto/data/acl"
-    ports:
-      - 1883:1883/tcp
+    entrypoint: "/usr/bin/mtcagent run /mtconnect/config/agent.cfg"
+    working_dir: "/home/agent"
     restart: unless-stopped

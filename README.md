@@ -3,102 +3,6 @@
 This repo houses an Ubuntu Docker version of the MTConnect Cpp agent. This creates most of the needed items to build a local docker CPP agent using docker and docker-compose.
 This project will mirror the log file to the local machine for full trace logging of the agent. This project was origionally forked from [RaymondCui21/MTConnect_Docker](https://github.com/RaymondCui21/MTConnect_Docker), The project has been seperated from the origional code set due to the amount of changes occuring. 
 
-# Running from GitHub
-
-To run the project clone a local instance of the repo.
-
-``` bash
-git clone https://github.com/HEM-Inc/MTConnect.git <name you want for the local repo>
-```
-Edit the agent.cfg to meet your requirements and add any devices you need to the folder. This has been tested using subfolders for devises and Assets.
-To add asset definitions to the compiled project include the following line under the devises line see below.
-
-```bash
-# ---- Release ----
-### Create folders, copy device files and dependencies for the release
-FROM ubuntu-base AS ubuntu-release
-LABEL author="HEMsaw" description="Ubuntu based docker image for the latest Release Version of the MTConnect C++ Agent"
-EXPOSE 5000:5000/tcp
-
-# change to a new non-root user for better security.
-# this also adds the user to a group with the same name.
-# --create-home creates a home folder, ie /home/<username>
-USER root
-RUN useradd --create-home agent
-USER agent
-WORKDIR /etc/MTC_Agent/
-
-# install agent executable
-COPY --chown=agent:agent --from=ubuntu-core /root/agent/mtcagent_dist.tar.gz /etc/MTC_Agent/
-
-# Extract the data
-RUN  tar -xf /etc/MTC_Agent/mtcagent_dist.tar.gz -C /etc/MTC_Agent/
-
-USER root
-RUN set -x \
-  && cp /etc/MTC_Agent/mtcagent_dist/bin/* /usr/bin \
-  && cp /etc/MTC_Agent/mtcagent_dist/lib/* /usr/lib \
-  && mkdir -p /etc/mtconnect/config \
-            /etc/mtconnect/data \
-            /etc/mtconnect/log \
-  && chown -R agent:agent /etc/mtconnect \
-  && rm -r /etc/MTC_Agent
-
-WORKDIR /etc/mtconnect/
-
-# copy custom data files and folders to /etc/MTC_Agent/*
-USER agent
-COPY --chown=agent:agent agent.cfg /etc/mtconnect/data/
-COPY --chown=agent:agent ./Devices/ /etc/mtconnect/data/devices/
-COPY --chown=agent:agent ./Assets/ /etc/mtconnect/data/assets
-Copy --chown=agent:agent ./Ruby/ /etc/mtconnect/data/ruby
-COPY --chown=agent:agent ./Styles/ /etc/mtconnect/data/styles
-
-# copy data from the cppagent repo to /etc/mtconnect/*
-COPY --chown=agent:agent --from=ubuntu-core app_build/schemas/ /etc/mtconnect/data/schemas
-
-VOLUME ["/etc/mtconnect/config", "/etc/mtconnect/log", "/etc/mtconnect/data"]
-ENTRYPOINT ["/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"]
-### EOF
-```
-
-To edit the instance settings use the docker-compose.yml file. 
-```yml
-version: '3.5'
-services:
-  agent:
-    container_name: mtc_agent
-    hostname: mtc_agent
-    build: .
-    user: agent
-    environment:
-      - TZ=Etc/UTC
-      - DEBIAN_FRONTEND=noninteractive
-    ports: 
-      - 5000:5000/tcp
-    entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
-    working_dir: "/etc/mtconnect/"
-    restart: unless-stopped
-    volumes:
-      - './agent.cfg:/etc/mtconnect/data/agent.cfg'
-      - './Devices/:/etc/mtconnect/data/devices'
-      - './Assets/:/etc/mtconnect/data/assets'
-      - './Ruby/:/etc/mtconnect/data/ruby'
-
-  mosquitto:
-    container_name: mosquitto
-    hostname: mosquitto
-    image: eclipse-mosquitto:latest
-    volumes:
-      - "./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf"
-      # - "./mqtt/mosquitto/passwd:/mosquitto/data/passwd"
-      - "./mqtt/mosquitto/acl:/mosquitto/data/acl"
-    ports:
-      - 1883:1883/tcp
-    restart: unless-stopped
-
-```
-
 # Running from DockerHub
 
 Running a project form the prebuilt dockerhub libarary will speed up the build time.
@@ -109,35 +13,31 @@ docker-compose.yml
 ```yml
 version: '3.5'
 services:
-  agent:
+  mtc_agent:
     container_name: mtc_agent
     hostname: mtc_agent
     image: hemsaw/mtconnect:latest
     user: agent
-    environment:
-      - TZ=Etc/UTC
-      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      - "/etc/mtconnect/config/:/mtconnect/config/"
+      - "/etc/mtconnect/data/ruby/:/mtconnect/data/ruby/"
     ports: 
       - 5000:5000/tcp
-    entrypoint: "/usr/bin/mtcagent run /etc/mtconnect/data/agent.cfg"
-    working_dir: "/etc/mtconnect/"
+    entrypoint: "/usr/bin/mtcagent run /mtconnect/config/agent.cfg"
+    working_dir: "/home/agent"
     restart: unless-stopped
-    volumes:
-      - './agent.cfg:/etc/mtconnect/data/agent.cfg'
-      - './Devices/:/etc/mtconnect/data/devices'
-      - './Assets/:/etc/mtconnect/data/assets'
-      - './Ruby/:/etc/mtconnect/data/ruby'
 
   mosquitto:
     container_name: mosquitto
     hostname: mosquitto
     image: eclipse-mosquitto:latest
     volumes:
-      - "./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf"
-      # - "./mqtt/mosquitto/passwd:/mosquitto/data/passwd"
-      - "./mqtt/mosquitto/acl:/mosquitto/data/acl"
+      - "/etc/mosquitto/conf.d/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+      - "/etc/mosquitto/passwd:/mosquitto/data/passwd"
+      - "/etc/mosquitto/acl:/mosquitto/data/acl"
     ports:
       - 1883:1883/tcp
+      - 9001:9001/tcp
     restart: unless-stopped
 
 ```

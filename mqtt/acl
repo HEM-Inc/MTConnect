@@ -1,9 +1,0 @@
-# Allow anonymous access to the sys
-topic read $SYS/#
-
-# Allow anonymous to read MTConnect (change to read when acl is implemented)
-topic readwrite MTConnect/#
-
-# Allow secure readwrite to the broker from MTConnect using the mtconnect user
-# user mtconnect
-# topic readwrite MTConnect/#
