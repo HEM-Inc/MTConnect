@@ -8,7 +8,7 @@ on:
 
     # Publish `2.1.2.3` tags as releases.
     tags:
-      - "[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"
+      - "*.*.*.*"
   # pull_request:
   #  branches:
   #    - "main"
@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - 
-        name: Remove leading v from the version
+        name: create version
         run: |
           echo "VERSION=$(echo ${{ github.ref_name }})" >> $GITHUB_ENV
           echo "MAJOR_VERSION=$(echo ${{ github.ref_name }} | sed -E 's/^([0-9]+)\.([0-9]+)\..+/\1.\2/')" >> $GITHUB_ENV
