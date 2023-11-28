@@ -5,6 +5,7 @@ on:
     # Test `develop`
     branches:
       - develop
+      - main
 
   # Run tests for any PRs.
   pull_request:
