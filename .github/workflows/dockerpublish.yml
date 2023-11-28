@@ -3,8 +3,8 @@ name: Docker Publish
 on:
   push:
     # Publish `main` as Docker `latest` image.
-    branches:
-      - "main"
+    #branches:
+    #  - "main"
 
     # Publish `2.1.2.3` tags as releases.
     tags:
@@ -12,6 +12,8 @@ on:
   pull_request:
     branches:
       - "main"
+  # allows you to run this workflow manually from the actions tab
+  workflow_dispatch:
 
 env:
   app: mtconnect
@@ -35,14 +37,23 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - 
+        name: set version
+        run: |
+          echo "VERSION=$(echo ${{ github.ref_name }}" >> $GITHUB_ENV
       -
         name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
+          # docker hub user/repo:tag
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/mtconnect:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/mtconnect:${{ env.VERSION }}
+          # push to docker hub
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mtconnect:latest
+
       
       # steps:
       #   - name: Build and push Docker images
