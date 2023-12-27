@@ -5,6 +5,7 @@ on:
     # Test `develop`
     branches:
       - develop
+      - dev
       - main
 
   # Run tests for any PRs.
