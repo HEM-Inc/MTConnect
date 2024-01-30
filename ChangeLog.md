@@ -7,6 +7,10 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased] 
 
+## [2.2.0.17] - 2024/01/30 - Max Harris
+### Changed
+Approved the release of the 2.2.0.17 mtconnect instutite version.
+
 ## [2.2.0.16] - 2023/11/28 - Max Harris
 ### Changed
 Approved the release of the 2.2.0.16 mtconnect instutite version.

@@ -7,7 +7,7 @@ This project will mirror the log file to the local machine for full trace loggin
 
 Running a project form the prebuilt dockerhub libarary will speed up the build time.
 
-To get the project running create a dockerfile, docker-entrypoint.sh, and a docker-compose.yml file similar to the ones below.
+To get the project running create a docker-compose.yml file similar to the one below.
 
 docker-compose.yml
 ```yml
@@ -18,28 +18,51 @@ services:
     hostname: mtc_agent
     image: hemsaw/mtconnect:latest
     user: agent
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     volumes:
       - "/etc/mtconnect/config/:/mtconnect/config/"
       - "/etc/mtconnect/data/ruby/:/mtconnect/data/ruby/"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports: 
       - 5000:5000/tcp
     entrypoint: "/usr/bin/mtcagent run /mtconnect/config/agent.cfg"
     working_dir: "/home/agent"
     restart: unless-stopped
+    depends_on:
+      - mosquitto
+      # - hivemq
 
   mosquitto:
     container_name: mosquitto
     hostname: mosquitto
-    image: eclipse-mosquitto:latest
+    image: hemsaw/mosquitto:latest
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     volumes:
-      - "/etc/mosquitto/conf.d/mosquitto.conf:/mosquitto/config/mosquitto.conf"
-      - "/etc/mosquitto/passwd:/mosquitto/data/passwd"
-      - "/etc/mosquitto/acl:/mosquitto/data/acl"
+      - "/etc/mqtt/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+      - "/etc/mqtt/data/passwd:/mosquitto/data/passwd"
+      - "/etc/mqtt/data/acl:/mosquitto/data/acl"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports:
       - 1883:1883/tcp
       - 9001:9001/tcp
     restart: unless-stopped
 
+```
+
+Note that the password and acl files need to have chmod 700 ran on them.
+```
+    chmod 0700 ./mqtt/data/passwd
+    chmod 0700 ./mqtt/data/acl
 ```
 
 # Core Docker and MTConnect Commands
