@@ -1,2 +1,0 @@
-MTConnect: 2.2.0
-Project: 2.2.0.14

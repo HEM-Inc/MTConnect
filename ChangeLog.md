@@ -7,6 +7,15 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased] 
 
+## [2.3.0.2] - 2024/02/19 - Max Harris
+## Changed
+Approved the release of the 2.3.0.2 agent.
+## Added
+New condition Id for Condition observations and associated activations
+Added Sender configuration setting Sender = ... to override header
+README updates for MQTT, SHDR, and other fixes
+2.3 schema files
+
 ## [2.2.0.17] - 2024/01/30 - Max Harris
 ### Changed
 Approved the release of the 2.2.0.17 mtconnect instutite version.
