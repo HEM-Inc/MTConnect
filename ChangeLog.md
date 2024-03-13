@@ -7,6 +7,18 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased] 
 
+## [2.3.0.3] - 2024/03/13 - Max Harris
+## Changed
+Approved the release of the 2.3.0.3 agent.
+## Added
+Added deviceModel and uuid documentation for SHDR protocol.
+AgentConfiguration::monitorThread message reports wrong number of seconds
+Added websockets support to MQTT Adapter by @wsobel
+Websockets support added to common MQTT client. May add to MQTT sink as well.
+Configure using MqttWs = true in agent.cfg for the MQTT adapter.
+## Fixed
+Fix for issue 420 by @mnoomnoo
+
 ## [2.3.0.2] - 2024/02/19 - Max Harris
 ## Changed
 Approved the release of the 2.3.0.2 agent.
