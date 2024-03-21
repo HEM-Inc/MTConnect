@@ -7,6 +7,14 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased] 
 
+## [2.3.0.4] - 2024/03/21 - Max Harris
+## Changed
+Approved the release of the 2.3.0.4 agent.
+## Fixed
+Fixed `* uuid` command handling in agent not as expected by @wsobel
+Reduced log level for config file search to debug @wsobel
+Crash when editing DataItem in Devices.xml file by @mnoomnoo
+
 ## [2.3.0.3] - 2024/03/13 - Max Harris
 ## Changed
 Approved the release of the 2.3.0.3 agent.
