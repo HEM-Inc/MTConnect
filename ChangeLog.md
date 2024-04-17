@@ -7,9 +7,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased] 
 
+## [2.3.0.7] - 2024/04/16 - Max Harris
+### Fixed
+- Fixed port in url for the MQTT service @wsobel
+
 ## [2.3.0.6] - 2024/04/13 - Max Harris
 ### Fixed
-- Fixed issues with respect to changing UUIDs
+- Fixed issues with respect to changing UUIDs @wsobel
 
 ## [2.3.0.4] - 2024/03/21 - Max Harris
 ### Changed
