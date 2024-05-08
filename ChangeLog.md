@@ -7,6 +7,10 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased] 
 
+## [2.3.0.8] - 2024/05/07 - Max Harris
+### Added
+- Support for initial value that sets the data item's observation whenever the device becomes available.
+
 ## [2.3.0.7] - 2024/04/16 - Max Harris
 ### Fixed
 - Fixed port in url for the MQTT service @wsobel
