@@ -8,6 +8,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.3.0.10] - 2024/06/06 - Max Harris
+
+### Fixed
+
+- Fixes some unhandled exceptions relation to numeric conversions in the pipeline.  @wsobel
+- Fixes Windows Services with a configuration file other than agent.cfg @wsobel
+
 ## [2.3.0.9] - 2024/05/13 - Max Harris
 
 ### Changed
