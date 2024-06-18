@@ -8,6 +8,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.3.0.11] -  2024/-6/17 - Max Harris
+
+### Fixed
+
+- Fixed bug where observations were not set to unavailable when MQTT Source would disconnect from broker
+- Fixed bug with topics being incorrectly set when parsing the path
+
 ## [2.3.0.10] - 2024/06/06 - Max Harris
 
 ### Fixed
