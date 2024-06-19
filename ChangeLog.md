@@ -8,7 +8,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
-## [2.3.0.11] -  2024/-6/17 - Max Harris
+## [2.3.0.12] -  2024/06/19 - Max Harris
+
+### Fixed
+
+- Updated MTConnect schema files with fixes for condition ID.
+
+## [2.3.0.11] -  2024/06/17 - Max Harris
 
 ### Fixed
 
