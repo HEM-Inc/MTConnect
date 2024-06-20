@@ -8,6 +8,12 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.3.0.14] -  2024/06/20 - Max Harris
+
+### Fixed
+- Fixed issues with MQTT disconnect and options passing to the pipeline
+- Fixed MQTT Host and Port in the URL
+
 ## [2.3.0.12] -  2024/06/19 - Max Harris
 
 ### Fixed
