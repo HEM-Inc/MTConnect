@@ -6,10 +6,10 @@ on:
     branches:
       - develop
       - dev
-      - main
+      # - main
 
   # Run tests for any PRs.
-  pull_request:
+  # pull_request:
 
 env:
   IMAGE_NAME: MTConnect_Docker_Agent

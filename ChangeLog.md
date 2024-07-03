@@ -8,6 +8,16 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.3.0.15] -  2024/07/02 - Max Harris
+
+### Added
+- `MqttRetain` and `MqttQOS` are now settable options in the configuration of Mqtt 2 Service (the latest).
+- `MqttQOS` options are: at_least_once, at_most_once, and exactly_once. The default is at_least_once
+- `MqttRetain` can be true or false.
+
+### Fixed
+- UUID device changes were not being pushed through to the Mqtt Service and were not reposting. This required redoing the UUID and device changed handling to better support changes in pub/sub services other than REST.
+
 ## [2.3.0.14] -  2024/06/20 - Max Harris
 
 ### Fixed
