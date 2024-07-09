@@ -8,6 +8,11 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.3.0.16] -  2024/07/09 - Max Harris
+
+### Added
+- Added `MqttRetain` and `MqttQOS` options for the MqttSink2. See docs.
+
 ## [2.3.0.15] -  2024/07/02 - Max Harris
 
 ### Added
