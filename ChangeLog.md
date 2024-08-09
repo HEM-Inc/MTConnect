@@ -8,6 +8,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.4.0.1] -  2024/08/09 - Max Harris
+
+### Added
+- Added json schem for configuration files
+- Fixed documentation for the configuration in the readme.
+- Added xpath to the `Mqtt2Service` to subselect what components and data items will be published.
+
 ## [2.3.0.16] -  2024/07/09 - Max Harris
 
 ### Added
