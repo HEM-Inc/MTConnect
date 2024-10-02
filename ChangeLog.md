@@ -8,41 +8,55 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
-## [2.4.0.1] -  2024/08/09 - Max Harris
+## [2.4.0.2] - 2024/10/02 - Max Harris
+
+### Fixed
+
+- Device.xml dynamic loading where the file has not changed. It was causing a crash when a current was run.
+
+## [2.4.0.1] - 2024/08/09 - Max Harris
 
 ### Added
+
 - Added json schem for configuration files
-- Fixed documentation for the configuration in the readme.
 - Added xpath to the `Mqtt2Service` to subselect what components and data items will be published.
 
-## [2.3.0.16] -  2024/07/09 - Max Harris
+### Fixed
+
+- - Fixed documentation for the configuration in the readme.
+
+## [2.3.0.16] - 2024/07/09 - Max Harris
 
 ### Added
+
 - Added `MqttRetain` and `MqttQOS` options for the MqttSink2. See docs.
 
-## [2.3.0.15] -  2024/07/02 - Max Harris
+## [2.3.0.15] - 2024/07/02 - Max Harris
 
 ### Added
+
 - `MqttRetain` and `MqttQOS` are now settable options in the configuration of Mqtt 2 Service (the latest).
 - `MqttQOS` options are: at_least_once, at_most_once, and exactly_once. The default is at_least_once
 - `MqttRetain` can be true or false.
 
 ### Fixed
+
 - UUID device changes were not being pushed through to the Mqtt Service and were not reposting. This required redoing the UUID and device changed handling to better support changes in pub/sub services other than REST.
 
-## [2.3.0.14] -  2024/06/20 - Max Harris
+## [2.3.0.14] - 2024/06/20 - Max Harris
 
 ### Fixed
+
 - Fixed issues with MQTT disconnect and options passing to the pipeline
 - Fixed MQTT Host and Port in the URL
 
-## [2.3.0.12] -  2024/06/19 - Max Harris
+## [2.3.0.12] - 2024/06/19 - Max Harris
 
 ### Fixed
 
 - Updated MTConnect schema files with fixes for condition ID.
 
-## [2.3.0.11] -  2024/06/17 - Max Harris
+## [2.3.0.11] - 2024/06/17 - Max Harris
 
 ### Fixed
 
@@ -53,7 +67,7 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ### Fixed
 
-- Fixes some unhandled exceptions relation to numeric conversions in the pipeline.  @wsobel
+- Fixes some unhandled exceptions relation to numeric conversions in the pipeline. @wsobel
 - Fixes Windows Services with a configuration file other than agent.cfg @wsobel
 
 ## [2.3.0.9] - 2024/05/13 - Max Harris
