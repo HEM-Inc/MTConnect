@@ -8,6 +8,12 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.4.0.3] -  2024/10/07 - Max Harris
+
+### Fixed
+- Fixed error handling when MQTT adapter json keys do not match any data item. Logs an error and continues.
+
+
 ## [2.4.0.2] - 2024/10/02 - Max Harris
 
 ### Fixed
