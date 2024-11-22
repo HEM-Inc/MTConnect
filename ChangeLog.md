@@ -8,16 +8,24 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
-## [2.4.0.4] -  2024/10/24 - Max Harris
+## [2.4.0.5] - 2024/11/21 - Max Harris
+
+### Added
+
+- Added addition hook after start to allow callback after all services have started.
+- Added sink contract access to the hooks so they can have actions called after certain events in the agent.
+
+## [2.4.0.4] - 2024/10/24 - Max Harris
 
 ### Fixed
+
 - The agent now logs and exits if the adapter URL is malformed.@wsobel
 
-## [2.4.0.3] -  2024/10/07 - Max Harris
+## [2.4.0.3] - 2024/10/07 - Max Harris
 
 ### Fixed
-- Fixed error handling when MQTT adapter json keys do not match any data item. Logs an error and continues.
 
+- Fixed error handling when MQTT adapter json keys do not match any data item. Logs an error and continues.
 
 ## [2.4.0.2] - 2024/10/02 - Max Harris
 
