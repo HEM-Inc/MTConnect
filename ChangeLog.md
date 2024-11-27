@@ -8,6 +8,12 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.4.0.6] - 2024/11/27 - Max Harris
+
+### Added
+
+- Use log channel to divide traffic for various plugin logging by @simonyg
+
 ## [2.4.0.5] - 2024/11/21 - Max Harris
 
 ### Added
