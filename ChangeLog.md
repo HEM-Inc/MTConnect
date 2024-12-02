@@ -8,6 +8,12 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.4.0.7] - 2024/12/01 - Max Harris
+
+### Added
+
+- Added support for data sets and tables for sample category.
+
 ## [2.4.0.6] - 2024/11/27 - Max Harris
 
 ### Added
