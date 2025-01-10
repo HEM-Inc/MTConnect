@@ -1,11 +1,8 @@
 # MTConnect_Docker_Agent Project
 
-This repo houses an Ubuntu Docker version of the MTConnect Cpp agent. This creates most of the needed items to build a local docker CPP agent using docker and docker-compose.
-This project will mirror the log file to the local machine for full trace logging of the agent. This project was origionally forked from [RaymondCui21/MTConnect_Docker](https://github.com/RaymondCui21/MTConnect_Docker), The project has been seperated from the origional code set due to the amount of changes occuring. 
+This repo houses an approved official MTConnect docker container release for HEMsaw.
 
-# Running from DockerHub
-
-Running a project form the prebuilt dockerhub libarary will speed up the build time.
+# Running
 
 To get the project running create a docker-compose.yml file similar to the one below.
 
