@@ -26,6 +26,31 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.5.0.4] - 2025/03/25 - Max Harris
+
+### Fixed
+
+- 533 Fixed Agent device data items for MQTT adapter changing on restart
+- Fixed unit conversion issue when converting between kWh and Ws.
+- Multipart conversions like: KILOWATT_HOUR to WATT_SECOND did not multiply the temporal component.
+
+## [2.5.0.2] - 2025/03/10 - Max Harris
+
+### Added
+
+- Support for DataSets and tables in XML parsing for Configuration CoordinateSystem and Motion.
+    - Support for validation of the MTConnect Streams document
+    - In the configuration file set: Validation = true
+- At present, it only validates controlled vocabulary (enumerations). In future releases, we will validate all types.
+    - Added support for new asset models: Pallet and Fixture
+- Supports WebSockets communication using the REST interface
+    - See Wiki for more information (https://github.com/mtconnect/cppagent/wiki)
+
+### Deprecated 
+
+- Deprecated the old MQTT Server, topics now mirror probe, current, and streams.
+    - See wiki for more information (https://github.com/mtconnect/cppagent/wiki)
+
 ## [2.4.0.8] - 2025/01/06 - Max Harris
 
 ### Fixed
