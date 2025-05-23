@@ -26,6 +26,16 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.5.0.5] - 2025/05/21 - Max Harris
+
+### Added
+- Observation validation for all data types has been added.
+    - Validate numeric values for samples and event types.
+    - Validate controlled vocabularies (existing)
+    - Validation must be turned on and the schema version must be >= 2.5.
+- Added timestamp correction when an observation timestamp is before the previous observation
+    - This is enabled with the CorrectTimestamps
+
 ## [2.5.0.4] - 2025/03/25 - Max Harris
 
 ### Fixed
@@ -46,7 +56,7 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 - Supports WebSockets communication using the REST interface
     - See Wiki for more information (https://github.com/mtconnect/cppagent/wiki)
 
-### Deprecated 
+### Deprecated
 
 - Deprecated the old MQTT Server, topics now mirror probe, current, and streams.
     - See wiki for more information (https://github.com/mtconnect/cppagent/wiki)
