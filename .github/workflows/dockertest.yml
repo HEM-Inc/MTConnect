@@ -28,7 +28,7 @@ jobs:
           - platform: linux/amd64
             build: true
           - platform: linux/arm64
-            build: false  # Set this to true if you want to build ARM64
+            build: true  # Set this to true if you want to build ARM64
     steps:
       - name: Checkout
         uses: actions/checkout@v3

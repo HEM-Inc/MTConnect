@@ -26,6 +26,22 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.5.0.9] - 2025/06/11 - Max Harris
+
+### Added
+
+- Added correct timestamps transform and added to loopback source
+
+### Fixed
+
+- Fixed bug in data set handling
+- Fixed the Debian version number for the package
+- Merged corrections to readme and MQTT documentation
+- Switched docker builds back to Alpine since QEMU is working again
+- Fixed WebSocket issues in release builds
+- Upgraded build to Visual Studio 2022 because GitHub is deprecating 2019.
+- Changes cause issues with Release builds and recursive DataSet/Table implementation
+
 ## [2.5.0.5] - 2025/05/21 - Max Harris
 
 ### Added
