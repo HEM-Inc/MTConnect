@@ -26,6 +26,18 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.5.0.11] - 2025/07/31 - Max Harris
+
+###  Fixed
+
+- Fixed issue with double underscores in a data item type
+- Fixed json V1 issues with empty streams
+- Fixed issue with DeprecatedFilter occurring before the duplicate filter.
+
+### Added
+
+- MTConnect styles for demo with links for machines
+
 ## [2.5.0.9] - 2025/06/11 - Max Harris
 
 ### Added
