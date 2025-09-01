@@ -26,6 +26,18 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.6.0.0] - 2025/08/31 - Max Harris
+
+### Added 
+
+- Added changes to support version 2.6 REST error response documents.
+- Support for AssetAdded event that adds to AssetChanged and AssetRemoved.
+
+### Fixed
+
+- Fixed WebSocket error reporting and handling.
+- All error handling is backwards compatible to support old error documents.
+
 ## [2.5.0.11] - 2025/07/31 - Max Harris
 
 ###  Fixed
