@@ -18,17 +18,13 @@ on:
 
 env:
   app: mtconnect
+  # Platform control flags - set to false to disable a platform
+  BUILD_AMD64: true
+  BUILD_ARM64: true
 
 jobs:
   docker:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - platform: linux/amd64
-            build: true
-          - platform: linux/arm64
-            build: true  # Set this to true if you want to build ARM64
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,22 +37,35 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: create version
+      - name: Determine platforms to build
+        id: platforms
         run: |
-          echo "VERSION=$(echo ${{ github.ref_name }})" >> $GITHUB_ENV
-          echo "MAJOR_VERSION=$(echo ${{ github.ref_name }} | sed -E 's/^([0-9]+)\.([0-9]+)\..+/\1.\2/')" >> $GITHUB_ENV
+          platforms=""
+          if [ "${{ env.BUILD_AMD64 }}" = "true" ]; then
+            platforms="linux/amd64"
+          fi
+          if [ "${{ env.BUILD_ARM64 }}" = "true" ]; then
+            if [ -n "$platforms" ]; then
+              platforms="$platforms,linux/arm64"
+            else
+              platforms="linux/arm64"
+            fi
+          fi
+
+          if [ -z "$platforms" ]; then
+            echo "Error: No platforms enabled for build"
+            exit 1
+          fi
+
+          echo "platforms=$platforms" >> $GITHUB_OUTPUT
+          echo "Building for platforms: $platforms"
       - name: Build and push
-        if: matrix.build
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: ${{ matrix.platform }}
-          # docker hub user/repo:tag
+          platforms: ${{ steps.platforms.outputs.platforms }}
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/mtconnect:experimental
-          # push to docker hub
           push: true
-
-      # steps:
-      #   - name: Build and push Docker images
-      #     uses: docker/build-push-action@v2.5.0
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
