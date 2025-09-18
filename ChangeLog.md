@@ -26,6 +26,16 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.6.0.2] - 2025/09/17 - Max Harris
+
+### Fixed
+
+- This is a bug fix to correct the content type for XML documents.
+- Build issues that occurred when the platform for OS X was upgraded on GitHub actions for the regression tests.
+- Now compatible with CMake version 4.0.
+- Related Alpine build issues regarding the changes.
+
+
 ## [2.6.0.0] - 2025/08/31 - Max Harris
 
 ### Added 
