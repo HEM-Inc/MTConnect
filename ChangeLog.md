@@ -26,6 +26,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.6.0.3] - 2025/10/05 - Max Harris
+
+### Security
+
+- This release upgrades the agent to C++ 20, Boost 1.88, and the latest versions of other libraries. The migration prevents us from dependency on unsupported versions of libraries that may have security vulnerabilities or bugs.
+- The one caveat is the 32-bit version now targets Windows 10 since Windows Vista (8) is no longer supported by Windows or dependent libraries. I will test the agent with earlier versions of Windows in the near future.
+
 ## [2.6.0.2] - 2025/09/17 - Max Harris
 
 ### Fixed
@@ -34,7 +41,6 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 - Build issues that occurred when the platform for OS X was upgraded on GitHub actions for the regression tests.
 - Now compatible with CMake version 4.0.
 - Related Alpine build issues regarding the changes.
-
 
 ## [2.6.0.0] - 2025/08/31 - Max Harris
 
