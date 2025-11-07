@@ -26,6 +26,16 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.6.0.5] - 2025/11/06 - Max Harris
+
+### Fixed
+
+- Fixed a issue where the agent wouldnt shutdown properly with errors
+
+### Added
+
+- MQTTEntitySink to allow flat mqtt output
+
 ## [2.6.0.3] - 2025/10/05 - Max Harris
 
 ### Security
