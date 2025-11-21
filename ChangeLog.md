@@ -26,6 +26,23 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.6.0.7] - 2025/11/21 - Max Harris
+
+### Fixed
+
+- Fixed validation attribute for samples
+- Fixed MQTT Entity Sink tests to make them more deterministic
+- Cleaned up localtime handling
+
+### Added
+
+- Added stream logging for entities
+- For Docker Alpine build, added bash because of m4 and changed version to 3.22
+
+### Removed
+
+- Removed timezone db dependency–just using date library and local time
+
 ## [2.6.0.5] - 2025/11/06 - Max Harris
 
 ### Fixed
