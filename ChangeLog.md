@@ -26,6 +26,20 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.4] - 2026/02/25 - Max Harris
+
+### Added
+
+- Added support for 2.7 Assets
+
+### Changed
+
+- Updated the Readme file for CPP Agent
+- Completed WebSocket Asset support and WebSocket testing
+- Verify handling of Japanese characters
+- Migrated to C++ 20
+
+
 ## [2.6.0.7] - 2025/11/21 - Max Harris
 
 ### Fixed
