@@ -26,7 +26,7 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
-## [2.7.0.3] - 2026/02/25 - Max Harris
+## [2.7.0.4] - 2026/02/25 - Max Harris
 
 ### Added
 
