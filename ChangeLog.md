@@ -26,6 +26,12 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.5] - 2026/03/24 - Max Harris
+
+## Fixed 
+
+- Exception when resolving addresses after a disconnect (see #597)
+
 ## [2.7.0.4] - 2026/02/25 - Max Harris
 
 ### Added
