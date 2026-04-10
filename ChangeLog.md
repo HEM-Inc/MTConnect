@@ -26,6 +26,31 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.7] - 2026/04/10 - Max Harris
+
+### Added
+
+- Add OPTIONS support for CORS by @wsobel in #599
+    - Responds to the HTTP OPTIONS request for preflight on a PUT, POST, GET, or DELETE
+    - Respects the available REST methods for a given URL.
+
+### Fixed
+
+- Reduce conan cache size in GitHub workflow to reduce build times
+- Agent Adapter
+    - Refactored and cleaned up session handling
+- Configuration
+    - Changed logging configuration settings to better match documentation
+    - max_size is the maximum size a log file can get to before it rolls over
+    - max_archive_size is the maximum size that all the archived log files can consume before they are removed
+- Fix missing line break in usage text by @scottmwyant in #600
+- Fixed logging directory determination when relative directories are given for the file:
+    - The directory will be relative to the configuration file
+    - All logging and archive directories are created if they do not exist
+    - If a relative or absolute directory is given in the file name, then it will be used a the log directory
+    - An archive directory, if given, will be used for the archive files.
+    - use file_name instead of output = file  if there are spaces in the file name.
+
 ## [2.7.0.5] - 2026/03/24 - Max Harris
 
 ## Fixed 
