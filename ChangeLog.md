@@ -26,6 +26,21 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.9] - 2026/04/30 - Max Harris
+
+### Added
+
+- Added swagger viewer if the user agent accepts html/text first
+- Added Date to the http response header
+- Added a json v2 test
+
+### Fixed
+
+- Fixed issues in docker agent config files
+- Cleaned up json parser for entities
+- Bug fixes related to an initial code review.
+- Restored rotation_size as alias for max_size
+
 ## [2.7.0.7] - 2026/04/10 - Max Harris
 
 ### Added
