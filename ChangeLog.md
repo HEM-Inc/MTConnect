@@ -26,6 +26,18 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.10] - 2026/05/17 - Max Harris
+
+### Added
+
+- Added more detailed host logging in the REST sink
+- Added support for adapter → Agent Device files with <MTConnectDevices> root element
+
+### Changed
+
+- Default REST sink to bind to :: instead of 0.0.0.0 and ensure dual stack is enabled
+- Made all test names descriptive
+
 ## [2.7.0.9] - 2026/04/30 - Max Harris
 
 ### Added
