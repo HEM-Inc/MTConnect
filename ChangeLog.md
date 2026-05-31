@@ -26,6 +26,19 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.11] - 2026/05/30 - Max Harris
+
+### Added
+
+- JSON Schema Support
+    - Agent now adds $schema property to the json document
+    - JSON Schema documents are present for versions 2.0 to 2.7
+    - Some testing is still required to validate all combinations of documents and extensions
+
+### Fixed
+
+- Fixed some event type formatting for events with count units in JSON
+
 ## [2.7.0.10] - 2026/05/17 - Max Harris
 
 ### Added
