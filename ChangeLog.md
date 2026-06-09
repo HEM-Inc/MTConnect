@@ -26,6 +26,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.12] - 2026/06/09 - Max Harris
+
+### Fixed
+
+- Fixed recovery bug when the agent adapter disconnects from the upstream agent and tries to reconnect.
+- Fixed base URL for swagger server.
+
 ## [2.7.0.11] - 2026/05/30 - Max Harris
 
 ### Added
