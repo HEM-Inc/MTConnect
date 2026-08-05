@@ -26,6 +26,19 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.7.0.13] - 2026/08/05 - Max Harris
+
+### Added
+
+- Test coverage, mruby logging issues, VS 2026 test package. @wsobel
+- Added additional tests to improve test coverage
+
+### Fixed
+
+- Fixed some possible issues with some test frameworks
+- Fixed logging issues in the mruby implementation
+- Fixed VS 2026 support with the tests because of legacy cmake requirements
+
 ## [2.7.0.12] - 2026/06/09 - Max Harris
 
 ### Fixed
