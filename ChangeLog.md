@@ -26,6 +26,16 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.8.0.1] - 2026/09/05 - Max Harris
+
+### Added
+- Added resource monitoring for file descriptors and memory
+    - MonitorResources=yes
+
+### Fixed
+- Fixed resource leak
+- Addressed issue 617 with creation time now having microsecond accuracy.
+
 ## [2.7.0.13] - 2026/08/05 - Max Harris
 
 ### Added
