@@ -26,6 +26,13 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.8.0.3] - 2026/09/28 - Max Harris
+
+### Fixed
+- Fix issues with ruby transforms and return objects
+- Refactored some of the larger modules to separate out functionality to make them more maintainable.
+- Fixed issue with alpine Linux and small stack size when processing long URLs and recursion.
+
 ## [2.8.0.1] - 2026/09/05 - Max Harris
 
 ### Added
