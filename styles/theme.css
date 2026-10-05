@@ -26,13 +26,14 @@
   background: var(--ssc-grey);
 }
 
+/* the logo orange is only about 3.3:1 on white, so text links use a darker shade (about 5.3:1) */
 a {
-  color: var(--ssc-orange);
+  color: #c43a18;
 }
 
 a:hover,
 a:focus {
-  color: #c43a18;
+  color: #8f2a10;
 }
 
 /* UNAVAILABLE was #aaa, about 2.3:1 on white. #767676 is the lightest grey that reaches 4.5:1. */
@@ -43,4 +44,11 @@ a:focus {
 .mtc-close:hover,
 .mtc-close:focus-visible {
   color: var(--ssc-orange);
+}
+
+/* attribution and trademark lines at the end of the help dialog */
+.mtc-legal {
+  margin-top: 1em;
+  font-size: 0.85em;
+  color: #555;
 }

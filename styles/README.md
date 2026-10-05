@@ -44,7 +44,7 @@ StreamsStyle { Location = /styles/styles.xsl }
 
 ## Smart Saw Connect browser view
 
-`viewer.html`, `viewer.css` and the `mtc-*.js` modules are the JavaScript browser view proposed for the cppagent in [mtconnect/cppagent#621](https://github.com/mtconnect/cppagent/pull/621), copied from commit `56f5fa97`. It replaces `styles.xsl` for browsers that no longer support XSLT (Chrome 158 and later). `viewer.html` is patched for Smart Saw (logo, title, favicon, help text), and `theme.css` holds the brand colors. Keep both changes small so later updates from the cppagent are easy to merge.
+`viewer.html`, `viewer.css` and the `mtc-*.js` modules are the JavaScript browser view proposed for the cppagent in [mtconnect/cppagent#621](https://github.com/mtconnect/cppagent/pull/621), copied from commit `56f5fa97`. It replaces `styles.xsl` for browsers that no longer support XSLT (Chrome 158 and later). `viewer.html` is patched for Smart Saw (logo, title, favicon, help text), and `theme.css` holds the brand colors. Both projects are under the Apache License 2.0. The help dialog carries the attribution and MTConnect trademark lines. Keep both changes small so later updates from the cppagent are easy to merge.
 
 It needs an agent build that includes #621. Add this to the agent configuration, next to the `Files` entries above:
 
