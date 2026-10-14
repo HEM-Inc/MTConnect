@@ -1,3 +1,20 @@
+/*
+ * Copyright 2009-2026, AMT – The Association For Manufacturing Technology ("AMT")
+ * All rights reserved.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 /* Additions for viewer.html. Everything is a class because the page runs under a strict
    Content-Security-Policy that does not allow inline style attributes. */
 
@@ -5,17 +22,18 @@
   padding: 5px 10px;
 }
 
-.mtc-path {
+/* Bootstrap sets .navbar-form .form-control to width: auto, so these need the same specificity */
+.navbar-form .mtc-path {
   width: 18em;
   margin-right: 6px;
 }
 
-.mtc-small {
+.navbar-form .mtc-small {
   width: 6em;
   margin-right: 6px;
 }
 
-.mtc-format {
+.navbar-form .mtc-format {
   display: inline-block;
   width: auto;
   margin-right: 6px;
@@ -23,6 +41,21 @@
 
 .navbar-form .btn {
   margin-right: 6px;
+}
+
+/* Extra links at the right of the navbar, such as the demo's digital twins. No horizontal
+   padding, so the links are spaced by their margins and the bar fits on one row. */
+.navbar-nav.mtc-links {
+  margin-right: 12px;
+}
+
+.navbar-nav.mtc-links > li {
+  margin-left: 12px;
+}
+
+.navbar-nav.mtc-links > li > a {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .mtc-notice {
@@ -45,10 +78,28 @@
   text-align: right;
 }
 
-/* +/- markers for rows with and without children */
+/* +/- markers for rows with and without children. Branches are buttons that collapse the rows below. */
+.mtc-branch {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
 .mtc-branch::before {
   content: '\229F';
   margin-right: 0.4em;
+}
+
+.mtc-branch[aria-expanded='false']::before {
+  content: '\229E';
+}
+
+tr[hidden] {
+  display: none;
 }
 
 .mtc-leaf::before {
@@ -141,4 +192,34 @@ dialog.mtc-wide pre {
 
 .mtc-scroll th {
   padding: 1px 8px;
+}
+
+/* The copyright line stays visible below the scrolling table */
+:root {
+  --footer-height: 26px;
+}
+
+.stickytable-container {
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+.mtc-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--footer-height);
+  line-height: var(--footer-height);
+  padding: 0 12px;
+  font-size: 12px;
+  color: #666;
+  background: #f5f5f5;
+  border-top: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#gotoTop {
+  bottom: calc(var(--footer-height) + 15px);
 }

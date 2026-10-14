@@ -26,6 +26,16 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.8.0.4] - 2026/10/13 - Max Harris
+
+### Added
+
+- Smart Saw Connect browser view (`styles/viewer.html`, `theme.css`, `mtc-*.js`), based on the cppagent JavaScript viewer (mtconnect/cppagent#621). Replaces `styles.xsl` once Chrome removes XSLT and the agent runs with `BrowserView = styles/viewer.html`.
+
+### Removed
+
+- Unused MTConnect logo files from `styles/`. MTConnect is credited in text only.
+
 ## [2.8.0.3] - 2026/09/28 - Max Harris
 
 ### Fixed
