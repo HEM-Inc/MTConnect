@@ -1,0 +1,54 @@
+/* Smart Saw branding for viewer.html. Loaded after viewer.css so it only overrides colors.
+   Brand colors are sampled from SSC_Logo.png. The status colors in viewer.css (green, yellow,
+   red) are left alone on purpose: orange would be mistaken for WARNING. */
+
+:root {
+  --ssc-orange: #ff4b21;
+  --ssc-orange-tint: #ffd6c9;
+  --ssc-grey: #696969;
+  --ssc-grey-dark: #575757;
+}
+
+/* selected tab and the active Autorefresh button */
+.navbar-inverse .navbar-nav > li.selected {
+  background: var(--ssc-grey-dark);
+  border-bottom-color: var(--ssc-orange);
+}
+
+.btn.active {
+  background: var(--ssc-orange-tint);
+  border-color: var(--ssc-orange);
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #fff;
+  background: var(--ssc-grey);
+}
+
+/* the logo orange is only about 3.3:1 on white, so text links use a darker shade (about 5.3:1) */
+a {
+  color: #c43a18;
+}
+
+a:hover,
+a:focus {
+  color: #8f2a10;
+}
+
+/* UNAVAILABLE was #aaa, about 2.3:1 on white. #767676 is the lightest grey that reaches 4.5:1. */
+.mtc-value-UNAVAILABLE {
+  color: #767676;
+}
+
+.mtc-close:hover,
+.mtc-close:focus-visible {
+  color: var(--ssc-orange);
+}
+
+/* attribution and trademark lines at the end of the help dialog */
+.mtc-legal {
+  margin-top: 1em;
+  font-size: 0.85em;
+  color: #555;
+}
