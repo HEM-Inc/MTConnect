@@ -26,6 +26,21 @@ For build level release notes see https://github.com/mtconnect/cppagent/
 
 ## [Unreleased]
 
+## [2.8.0.5] - 2026/11/17 - Max Harris
+
+### Added
+
+- MQTT broker support. See MQTT-Embedded Broker for details.
+- `DisconnectRemovesAllAssets` configuration option. Set it on one adapter, or at the top level for all adapters, to remove all of an adapter's assets when it disconnects.
+
+### Changed
+
+- Brought to parity with cppagent [v2.8.0.5](https://github.com/mtconnect/cppagent/releases/tag/v2.8.0.5).
+
+### Security
+
+- The browser view HTML document now encodes the XML it embeds, which prevents script injection through a raw asset posted to the agent. This only matters when `BrowserView` is enabled and HTTP asset posting is allowed without restriction.
+
 ## [2.8.0.4] - 2026/10/13 - Max Harris
 
 ### Added
